@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Font */
+@font-face {
+  font-family: Raleway;
+  src: url("assets/font/Raleway-Light.ttf") format("opentype");
+}
+/* End font */
+
+html, body,
+.full-screen{
+  width: 100%;
+  height: 100%;
+}
+
+.m-p-0{
+  margin: 0 auto!important;
+  padding: 0!important;
+}
+
+.font-rale-way{
+  font-family: 'Raleway', sans-serif;
+}
