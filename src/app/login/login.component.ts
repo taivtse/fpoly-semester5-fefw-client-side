@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService, FacebookLoginProvider} from 'angularx-social-login';
+import {AuthService, FacebookLoginProvider, SocialUser} from 'angularx-social-login';
 import {UserService} from './user.service';
 import {AuthApiService} from './auth-api.service';
 
@@ -9,6 +9,9 @@ import {AuthApiService} from './auth-api.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  private socialUser: SocialUser;
+  private loggedIn: boolean;
+
   public responseData: any;
   public userPostData = {
     email: '',
@@ -26,13 +29,22 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.socialAuthService.authState.subscribe((user) => {
+      this.socialUser = user;
+      this.loggedIn = (user != null);
+    });
   }
 
   public socialSignIn() {
-    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then(userData => {
-      console.log(userData);
-      // this.apiConnection(userData);
-    });
+    console.log(this.socialUser);
+    // this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then(userData => {
+    //   console.log(userData);
+    //   // this.apiConnection(userData);
+    // });
+  }
+
+  socialSignOut(): void {
+    this.socialAuthService.signOut();
   }
 
   apiConnection(data) {

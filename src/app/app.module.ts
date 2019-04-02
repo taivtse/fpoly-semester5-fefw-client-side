@@ -1,39 +1,23 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
-import {AuthServiceConfig, FacebookLoginProvider, SocialLoginModule} from 'angularx-social-login';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
-import {AuthApiService} from './login/auth-api.service';
-import {UserService} from './login/user.service';
-
-export function getAuthServiceConfigs() {
-  return new AuthServiceConfig(
-    [
-      {
-        id: FacebookLoginProvider.PROVIDER_ID,
-        provider: new FacebookLoginProvider('350926815630519')
-      }
-    ]
-  );
-}
+import {HomeComponent} from './home/home.component';
+import {LoginModule} from './login/login.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    SocialLoginModule
+    LoginModule
   ],
-  providers: [AuthApiService, UserService, {
-    provide: AuthServiceConfig,
-    useFactory: getAuthServiceConfigs
-  }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
