@@ -6,8 +6,9 @@ import {CommonModule} from '@angular/common';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, pathMatch: 'full'},
-  {path: 'chat/:username', component: ContainerComponent},
-  {path: '**', redirectTo: ''}
+  {path: 'home', component: ContainerComponent},
+  // {path: 'chat/:username', component: ContainerComponent},
+  // {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
