@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
-import {AuthServiceConfig, FacebookLoginProvider, SocialLoginModule} from 'angular-6-social-login';
+import {AuthServiceConfig, FacebookLoginProvider, SocialLoginModule} from 'angularx-social-login';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';

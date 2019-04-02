@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../login/user.service';
-import {AuthService} from 'angular-6-social-login';
+import {AuthService} from 'angularx-social-login';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
