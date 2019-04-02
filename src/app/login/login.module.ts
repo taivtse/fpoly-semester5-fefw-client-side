@@ -3,6 +3,8 @@ import {CommonModule} from '@angular/common';
 import {AuthService, AuthServiceConfig, FacebookLoginProvider} from 'angularx-social-login';
 import {AuthApiService} from './auth-api.service';
 import {UserService} from './user.service';
+import {RouterModule, Routes} from '@angular/router';
+import {LoginComponent} from './login.component';
 
 export function getAuthServiceConfigs() {
   return new AuthServiceConfig(
@@ -15,10 +17,15 @@ export function getAuthServiceConfigs() {
   );
 }
 
+const routes: Routes = [
+  {path: 'login', component: LoginComponent, pathMatch: 'full'},
+];
+
 @NgModule({
-  declarations: [],
+  declarations: [LoginComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild(routes)
   ],
   providers: [AuthApiService, UserService, AuthService, {
     provide: AuthServiceConfig,
