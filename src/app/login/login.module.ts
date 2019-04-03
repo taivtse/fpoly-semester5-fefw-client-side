@@ -1,8 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {AuthService, AuthServiceConfig, FacebookLoginProvider} from 'angularx-social-login';
-import {AuthApiService} from './auth-api.service';
-import {UserService} from './user.service';
+import {LoginService} from './login.service';
 import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './login.component';
 
@@ -27,7 +26,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes)
   ],
-  providers: [AuthApiService, UserService, AuthService, {
+  providers: [LoginService, AuthService, {
     provide: AuthServiceConfig,
     useFactory: getAuthServiceConfigs
   }]

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService, FacebookLoginProvider, SocialUser} from 'angularx-social-login';
-import {UserService} from './user.service';
-import {AuthApiService} from './auth-api.service';
+import {LoginService} from './login.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,63 +8,29 @@ import {AuthApiService} from './auth-api.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  private socialUser: SocialUser;
-  private loggedIn: boolean;
 
-  public responseData: any;
-  public userPostData = {
-    email: '',
-    name: '',
-    provider: '',
-    provider_id: '',
-    provider_pic: '',
-    token: ''
-  };
-
-  constructor(private socialAuthService: AuthService,
-              public authApiService: AuthApiService,
-              public userService: UserService) {
-    this.userService.sessionIn();
+  constructor(private router: Router, private loginService: LoginService) {
   }
 
   ngOnInit() {
-    this.socialAuthService.authState.subscribe((user) => {
-      this.socialUser = user;
-      this.loggedIn = (user != null);
-    });
-  }
-
-  public socialSignIn() {
-    console.log(this.socialUser);
-    // this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then(userData => {
-    //   console.log(userData);
-    //   // this.apiConnection(userData);
-    // });
-  }
-
-  socialSignOut(): void {
-    this.socialAuthService.signOut();
-  }
-
-  apiConnection(data) {
-    this.userPostData.email = data.email;
-    this.userPostData.name = data.name;
-    this.userPostData.provider = data.provider;
-    this.userPostData.provider_id = data.id;
-    this.userPostData.provider_pic = data.image;
-    this.userPostData.token = data.token;
-
-    this.authApiService.postData(this.userPostData).then(
-      result => {
-        this.responseData = result;
-        if (this.responseData.userData) {
-          this.userService.storeData(this.responseData.userData);
+    this.loginService.checkSessionIn()
+      .then(res => {
+        if (res === true) {
+          this.router.navigateByUrl('home');
         }
-      },
-      err => {
-        console.log('error');
-      }
-    );
+      });
   }
 
+  socialLogIn() {
+    this.loginService.login()
+      .then(() => {
+        this.router.navigateByUrl('home');
+      }).catch(err => console.log(err));
+  }
+
+  socialLogOut(): void {
+    this.loginService.logOut()
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  }
 }

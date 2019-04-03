@@ -1,5 +1,8 @@
 import {Component} from '@angular/core';
 import {Title} from '@angular/platform-browser';
+import {LoggedInUser, SharedData} from './shared/shared.data';
+import {StorageUtil} from './shared/storage.util';
+import {ConstantData} from './shared/constant.data';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +12,13 @@ import {Title} from '@angular/platform-browser';
 export class AppComponent {
   constructor(private titleService: Title) {
     this.titleService.setTitle('Connect Now');
+    SharedData.loggedInUser = StorageUtil.getLocalStorage(ConstantData.LOGGED_IN_USER_KEY) as LoggedInUser;
+
+    if (SharedData.loggedInUser === null) {
+      SharedData.loggedInUser = new LoggedInUser();
+      SharedData.isLoggedIn = false;
+    } else {
+      SharedData.isLoggedIn = true;
+    }
   }
 }
