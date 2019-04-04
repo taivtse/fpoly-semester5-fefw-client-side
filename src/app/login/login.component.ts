@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
     this.loginService.checkSessionIn()
       .then(res => {
         if (res === true) {
-          this.router.navigateByUrl('home');
+          this.router.navigateByUrl('chat');
         }
       });
   }
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   socialLogIn() {
     this.loginService.login()
       .then(() => {
-        this.router.navigateByUrl('home');
+        this.router.navigateByUrl('chat');
       }).catch(err => console.log(err));
   }
 
