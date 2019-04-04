@@ -5,6 +5,7 @@ import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {LoginModule} from './login/login.module';
 import {HomeModule} from './home/home.module';
+import {SharedData} from './shared/shared.data';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,12 @@ import {HomeModule} from './home/home.module';
     LoginModule,
     HomeModule
   ],
-  providers: [],
+  providers: [SharedData,
+    {
+      provide: SharedData,
+      useValue: window['APP_DATA']
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
