@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {HomeService} from './home.service';
 
 @Component({
-  selector: 'app-main',
+  selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
