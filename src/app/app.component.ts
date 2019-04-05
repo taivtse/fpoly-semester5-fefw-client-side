@@ -20,8 +20,6 @@ export class AppComponent {
     if (SharedData.loggedInUser) {
       this.userAuthApiService.authenticateUser(SharedData.loggedInUser)
         .then(isSuccess => SharedData.isLoggedIn = isSuccess);
-    } else {
-      SharedData.loggedInUser = new LoggedInUser();
     }
   }
 }

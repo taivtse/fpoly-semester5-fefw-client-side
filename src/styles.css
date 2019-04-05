@@ -470,7 +470,7 @@ body {
 
 #frame #side-bar #contacts ul li.contact {
   position: relative;
-  padding: 10px 0 15px 0;
+  padding: 10px 0 10px 0;
   font-size: 0.9em;
   cursor: pointer;
 }
@@ -555,6 +555,10 @@ body {
 
 #frame #side-bar #contacts ul li.contact .wrap .meta .name {
   font-weight: 600;
+}
+
+#frame #side-bar #contacts ul li.contact .wrap .meta .name.search {
+  margin-top: 8px;
 }
 
 #frame #side-bar #contacts ul li.contact .wrap .meta .preview {
