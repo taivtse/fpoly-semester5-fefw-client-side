@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {SharedData} from '../../shared/shared.data';
 
 @Component({
   selector: 'app-side-bar',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideBarComponent implements OnInit {
 
-  constructor() { }
+  private sharedData = SharedData;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

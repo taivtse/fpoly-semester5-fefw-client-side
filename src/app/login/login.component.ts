@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LoginService} from './login.service';
 import {Router} from '@angular/router';
+import {SharedData} from '../shared/shared.data';
 
 @Component({
   selector: 'app-login',
@@ -13,19 +14,20 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loginService.checkSessionIn()
-      .then(res => {
-        if (res === true) {
-          this.router.navigateByUrl('chat');
-        }
-      });
+    if (SharedData.isLoggedIn) {
+      this.router.navigateByUrl('chat');
+    }
   }
 
   socialLogIn() {
     this.loginService.login()
       .then(() => {
+        SharedData.isLoggedIn = true;
         this.router.navigateByUrl('chat');
-      }).catch(err => console.log(err));
+      }).catch(err => {
+      console.log(err);
+      SharedData.isLoggedIn = false;
+    });
   }
 
   socialLogOut(): void {

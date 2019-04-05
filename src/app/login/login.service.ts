@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {AuthService, FacebookLoginProvider, SocialUser} from 'angularx-social-login';
-import {SharedData} from '../shared/shared.data';
 import {ConstantData} from '../shared/constant.data';
 import {StorageUtil} from '../shared/storage.util';
 import {UserAuthApiService} from '../shared/user-auth-api.service';
+import {SharedData} from '../shared/shared.data';
 
 @Injectable({
   providedIn: 'root'

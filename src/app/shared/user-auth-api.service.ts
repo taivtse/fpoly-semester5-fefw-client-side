@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {LoggedInUser} from './shared.data';
 import {ConstantData} from './constant.data';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {LoggedInUser} from '../model/LoggedInUser';
 
 @Injectable({
   providedIn: 'root'
