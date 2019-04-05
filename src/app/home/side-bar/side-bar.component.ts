@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {SharedData} from '../../shared/shared.data';
 
 @Component({

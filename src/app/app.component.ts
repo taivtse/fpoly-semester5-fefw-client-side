@@ -12,16 +12,16 @@ import {UserAuthApiService} from './shared/user-auth-api.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private titleService: Title) {
+  constructor(private titleService: Title,
+              private userAuthApiService: UserAuthApiService) {
     this.titleService.setTitle('Connect Now');
 
     SharedData.loggedInUser = StorageUtil.getLocalStorage(ConstantData.LOGGED_IN_USER_KEY) as LoggedInUser;
-
-    if (SharedData.loggedInUser === null) {
-      SharedData.loggedInUser = new LoggedInUser();
-      SharedData.isLoggedIn = false;
+    if (SharedData.loggedInUser) {
+      this.userAuthApiService.authenticateUser(SharedData.loggedInUser)
+        .then(isSuccess => SharedData.isLoggedIn = isSuccess);
     } else {
-      SharedData.isLoggedIn = true;
+      SharedData.loggedInUser = new LoggedInUser();
     }
   }
 }
