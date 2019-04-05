@@ -1,34 +1,37 @@
-<div class="container-fluid full-screen m-0 py-5 text-center" id="login-page">
-  <div class="row mt-4">
-    <div class="col-12">
-      <img src="../../assets/imgs/logo-icon256x256.jpg" alt="" class="login-logo-icon">
+<ng-container *ngIf="isFinishCheckSessionIn">
+  <div class="container-fluid full-screen m-0 py-5 text-center" id="login-page">
+    <div class="row mt-4">
+      <div class="col-12">
+        <img src="../../assets/imgs/logo-icon256x256.jpg" alt="" class="login-logo-icon">
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12">
+        <img src="../../assets/imgs/ConnectNow-logo.png" alt="" class="login-logo-name">
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-12">
+        <p class="font-raleway">Instantly connect with people in your life.</p>
+      </div>
+      <div class="col-12">
+        <p class="font-raleway">Sign in with Connect Now to get started.</p>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-12 mt-4">
+        <button class="btn btn-lg rounded w-25 btn-sign-in font-raleway" (click)="socialLogIn()">Login with Facebook
+        </button>
+      </div>
+    </div>
+    <div class="row login-footer">
+      <div class="col-12 font-raleway">
+        <a href="https://www.facebook.com/r.php">Not on Facebook?</a>
+        <a href="https://www.facebook.com/login/identify?ctx=recover">Forgotten password</a>
+        <a href="https://www.facebook.com/about/privacy/">Data Policy</a>
+        <a href="https://www.facebook.com/legal/terms/">Terms</a>
+        <a href="https://www.facebook.com/policies/cookies/">Cookies Policy</a>
+      </div>
     </div>
   </div>
-  <div class="row mt-4">
-    <div class="col-12">
-      <img src="../../assets/imgs/ConnectNow-logo.png" alt="" class="login-logo-name">
-    </div>
-  </div>
-  <div class="row mt-5">
-    <div class="col-12">
-      <p class="font-raleway">Instantly connect with people in your life.</p>
-    </div>
-    <div class="col-12">
-      <p class="font-raleway">Sign in with Connect Now to get started.</p>
-    </div>
-  </div>
-  <div class="row mt-5">
-    <div class="col-12 mt-4">
-      <button class="btn btn-lg rounded w-25 btn-sign-in font-raleway" (click)="socialLogIn()">Login with Facebook</button>
-    </div>
-  </div>
-  <div class="row login-footer">
-    <div class="col-12 font-raleway">
-      <a href="https://www.facebook.com/r.php">Not on Facebook?</a>
-      <a href="https://www.facebook.com/login/identify?ctx=recover">Forgotten password</a>
-      <a href="https://www.facebook.com/about/privacy/">Data Policy</a>
-      <a href="https://www.facebook.com/legal/terms/">Terms</a>
-      <a href="https://www.facebook.com/policies/cookies/">Cookies Policy</a>
-    </div>
-  </div>
-</div>
+</ng-container>

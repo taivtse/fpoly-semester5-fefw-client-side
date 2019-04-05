@@ -10,20 +10,19 @@ import {UserAuthApiService} from '../shared/user-auth-api.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  isFinishCheckSessionIn = false;
+
   constructor(private router: Router,
-              private homeService: HomeService,
-              private userAuthApiService: UserAuthApiService) {
+              private homeService: HomeService) {
   }
 
   ngOnInit() {
-    if (!SharedData.isLoggedIn) {
-      this.userAuthApiService.authenticateUser(SharedData.loggedInUser)
-        .then(isSuccess => {
-          SharedData.isLoggedIn = isSuccess;
-          if (!isSuccess) {
-            this.router.navigateByUrl('login');
-          }
-        });
-    }
+    this.homeService.checkSessionIn()
+      .then(res => {
+        if (res === false) {
+          this.router.navigateByUrl('login');
+        }
+        this.isFinishCheckSessionIn = true;
+      });
   }
 }

@@ -9,14 +9,19 @@ import {SharedData} from '../shared/shared.data';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  isFinishCheckSessionIn = false;
 
   constructor(private router: Router, private loginService: LoginService) {
   }
 
   ngOnInit() {
-    if (SharedData.isLoggedIn) {
-      this.router.navigateByUrl('chat');
-    }
+    this.loginService.checkSessionIn()
+      .then(res => {
+        if (res === true) {
+          this.router.navigateByUrl('chat');
+        }
+        this.isFinishCheckSessionIn = true;
+      });
   }
 
   socialLogIn() {
