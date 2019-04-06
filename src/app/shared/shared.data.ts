@@ -1,7 +1,7 @@
-import {LoggedInUser} from '../model/LoggedInUser';
+import {UserModel} from '../model/UserModel';
 
 export class SharedData {
-  public static loggedInUser: LoggedInUser;
+  public static loggedInUser: UserModel;
   public static isLoggedIn = false;
 
   constructor() {

@@ -6,6 +6,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {LoginModule} from './login/login.module';
 import {HomeModule} from './home/home.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,

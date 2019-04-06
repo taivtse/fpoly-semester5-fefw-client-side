@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {StorageUtil} from './shared/storage.util';
 import {ConstantData} from './shared/constant.data';
-import {LoggedInUser} from './model/LoggedInUser';
+import {UserModel} from './model/UserModel';
 import {SharedData} from './shared/shared.data';
 import {UserAuthApiService} from './shared/user-auth-api.service';
 
@@ -16,12 +16,12 @@ export class AppComponent {
               private userAuthApiService: UserAuthApiService) {
     this.titleService.setTitle('Connect Now');
 
-    SharedData.loggedInUser = StorageUtil.getLocalStorage(ConstantData.LOGGED_IN_USER_KEY) as LoggedInUser;
+    SharedData.loggedInUser = StorageUtil.getLocalStorage(ConstantData.LOGGED_IN_USER_KEY) as UserModel;
     if (SharedData.loggedInUser) {
       this.userAuthApiService.authenticateUser(SharedData.loggedInUser)
         .then(isSuccess => SharedData.isLoggedIn = isSuccess);
     } else {
-      SharedData.loggedInUser = new LoggedInUser();
+      SharedData.loggedInUser = new UserModel();
     }
   }
 }
