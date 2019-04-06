@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {MessageDataItem} from '../../model/message-data.item';
 import {ChatBoxDataItem} from '../../model/chat-box-data.item';
@@ -10,9 +10,8 @@ import {ChatBoxDataItem} from '../../model/chat-box-data.item';
 })
 export class MainBoxComponent implements OnInit {
   chatBoxParam: string;
-  messageItems: MessageDataItem[] = [];
-
-  chatBoxMap: Map<string, ChatBoxDataItem> = new Map<string, ChatBoxDataItem>();
+  chatBoxDataItemMap: Map<string, ChatBoxDataItem> = new Map<string, ChatBoxDataItem>();
+  currentChatBoxDataItem: ChatBoxDataItem;
 
   constructor(private route: ActivatedRoute) {
     const message = new MessageDataItem();
@@ -22,9 +21,9 @@ export class MainBoxComponent implements OnInit {
     message.cssClass = 'sent';
     message.tooltipPlacement = 'left';
     message.photoUrl = 'https://graph.facebook.com/982392238618347/picture?type=normal';
-    const chatbox1: ChatBoxDataItem = new ChatBoxDataItem();
-
-    // this.chatBoxMap.set('tai', );
+    const chatbox: ChatBoxDataItem = new ChatBoxDataItem();
+    chatbox.messageDataItems.push(message);
+    this.chatBoxDataItemMap.set('tai', chatbox);
 
     const message1 = new MessageDataItem();
     message1.content = 'hi';
@@ -33,12 +32,15 @@ export class MainBoxComponent implements OnInit {
     message1.cssClass = 'replies';
     message1.tooltipPlacement = 'right';
     message1.photoUrl = 'https://graph.facebook.com/982392238618347/picture?type=normal';
-    this.messageItems.push(message1);
+    const chatbox1: ChatBoxDataItem = new ChatBoxDataItem();
+    chatbox1.messageDataItems.push(message1);
+    this.chatBoxDataItemMap.set('minh', chatbox1);
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.chatBoxParam = params.get('chatBoxParam');
+      this.currentChatBoxDataItem = this.chatBoxDataItemMap.get(this.chatBoxParam);
     });
   }
 

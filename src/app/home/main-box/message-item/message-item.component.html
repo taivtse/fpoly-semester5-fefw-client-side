@@ -1,5 +1,5 @@
-<li [class]="messageItem.cssClass">
-  <img [src]="messageItem.photoUrl">
-  <p placement="{{messageItem.tooltipPlacement}}" ngbTooltip="{{messageItem.date | date: 'EE dd/MM/yyyy hh:mm a'}}">
-    {{messageItem.content}}</p>
+<li [class]="messageDataItem.cssClass">
+  <img [src]="messageDataItem.photoUrl">
+  <p placement="{{messageDataItem.tooltipPlacement}}" ngbTooltip="{{messageDataItem.date | date: 'EE dd/MM/yyyy hh:mm a'}}">
+    {{messageDataItem.content}}</p>
 </li>

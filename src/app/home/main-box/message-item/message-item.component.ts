@@ -7,7 +7,7 @@ import {MessageDataItem} from '../../../model/message-data.item';
   styleUrls: ['./message-item.component.css']
 })
 export class MessageItemComponent implements OnInit {
-  @Input() messageItem: MessageDataItem;
+  @Input() messageDataItem: MessageDataItem;
 
   constructor() {
   }

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MessageDataItem} from '../../../model/message-data.item';
+import {ChatBoxDataItem} from '../../../model/chat-box-data.item';
 
 @Component({
   selector: 'app-chat-box',
@@ -7,7 +7,7 @@ import {MessageDataItem} from '../../../model/message-data.item';
   styleUrls: ['./chat-box.component.css']
 })
 export class ChatBoxComponent implements OnInit {
-  @Input() messageItems: MessageDataItem[];
+  @Input() chatBoxDataItem: ChatBoxDataItem;
 
   constructor() {
   }
