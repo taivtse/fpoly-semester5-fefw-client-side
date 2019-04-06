@@ -4,7 +4,4 @@ export class MessageModel {
   date: Date;
   type: string;
   memberId: number;
-
-  constructor() {
-  }
 }

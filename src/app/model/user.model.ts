@@ -6,7 +6,4 @@ export class UserModel {
   providerId: string;
   photoUrl: string;
   token: string;
-
-  constructor() {
-  }
 }

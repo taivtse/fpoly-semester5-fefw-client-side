@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {StorageUtil} from './shared/storage.util';
 import {ConstantData} from './shared/constant.data';
-import {UserModel} from './model/UserModel';
+import {UserModel} from './model/user.model';
 import {SharedData} from './shared/shared.data';
 import {UserAuthApiService} from './shared/user-auth-api.service';
 
