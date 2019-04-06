@@ -1,5 +1,5 @@
 <div class="messages">
-  <ul>
+  <ul *ngIf="chatBoxDataItem">
     <app-message-item *ngFor="let messageDataItem of chatBoxDataItem.messageDataItems"
                       [messageDataItem]="messageDataItem"></app-message-item>
   </ul>

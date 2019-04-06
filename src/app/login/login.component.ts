@@ -21,7 +21,10 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('chat');
         }
         this.isFinishCheckSessionIn = true;
-      });
+      }).catch((err) => {
+      console.log(err);
+      this.router.navigateByUrl('');
+    });
   }
 
   socialLogIn() {

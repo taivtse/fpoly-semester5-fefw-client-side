@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {SharedData} from '../../../shared/shared.data';
 
 @Component({
   selector: 'app-chat-item',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat-item.component.css']
 })
 export class ChatItemComponent implements OnInit {
+  isActive: boolean;
+  index: number;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
+  activeChatItem(): void {
+    // this.isActive = true;
+    SharedData.activeChatItemIndex = this.index;
+    console.log(SharedData.activeChatItemIndex);
+  }
 }

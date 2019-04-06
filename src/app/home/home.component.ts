@@ -21,6 +21,9 @@ export class HomeComponent implements OnInit {
           this.router.navigateByUrl('login');
         }
         this.isFinishCheckSessionIn = true;
-      });
+      }).catch((err) => {
+      console.log(err);
+      this.router.navigateByUrl('');
+    });
   }
 }

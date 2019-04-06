@@ -14,6 +14,9 @@ export class MainBoxComponent implements OnInit {
   currentChatBoxDataItem: ChatBoxDataItem;
 
   constructor(private route: ActivatedRoute) {
+    this.chatBoxDataItemMap.set('2', null);
+    this.chatBoxDataItemMap.set('1', null);
+    this.chatBoxDataItemMap.set('a', null);
     const message = new MessageDataItem();
     message.content = 'hello';
     message.memberId = 1;
