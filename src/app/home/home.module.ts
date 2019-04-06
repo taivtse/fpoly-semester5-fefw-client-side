@@ -14,7 +14,7 @@ import { MessageItemComponent } from './main-box/message-item/message-item.compo
 
 const routes: Routes = [
   {path: 'chat', component: HomeComponent},
-  {path: 'chat/:chatBoxId', component: HomeComponent},
+  {path: 'chat/:chatBoxParam', component: HomeComponent},
 ];
 
 @NgModule({

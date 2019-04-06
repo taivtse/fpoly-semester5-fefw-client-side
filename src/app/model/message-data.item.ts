@@ -1,4 +1,4 @@
-export class MessageItem {
+export class MessageDataItem {
   id: number;
   content: string;
   date: Date;
@@ -7,7 +7,4 @@ export class MessageItem {
   tooltipPlacement: string;
   photoUrl: string;
   cssClass: string;
-
-  constructor() {
-  }
 }

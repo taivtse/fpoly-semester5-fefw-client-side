@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from '@angular/router';
-import {MessageItem} from '../../model/MessageItem';
+import {MessageDataItem} from '../../model/message-data.item';
+import {ChatBoxDataItem} from '../../model/chat-box-data.item';
 
 @Component({
   selector: 'app-main-box',
@@ -8,20 +9,24 @@ import {MessageItem} from '../../model/MessageItem';
   styleUrls: ['./main-box.component.css']
 })
 export class MainBoxComponent implements OnInit {
-  chatBoxId: string;
-  messageItems: MessageItem[] = [];
+  chatBoxParam: string;
+  messageItems: MessageDataItem[] = [];
+
+  chatBoxMap: Map<string, ChatBoxDataItem> = new Map<string, ChatBoxDataItem>();
 
   constructor(private route: ActivatedRoute) {
-    const message = new MessageItem();
+    const message = new MessageDataItem();
     message.content = 'hello';
     message.memberId = 1;
     message.date = new Date();
     message.cssClass = 'sent';
     message.tooltipPlacement = 'left';
     message.photoUrl = 'https://graph.facebook.com/982392238618347/picture?type=normal';
-    this.messageItems.push(message);
+    const chatbox1: ChatBoxDataItem = new ChatBoxDataItem();
 
-    const message1 = new MessageItem();
+    // this.chatBoxMap.set('tai', );
+
+    const message1 = new MessageDataItem();
     message1.content = 'hi';
     message1.memberId = 2;
     message1.date = new Date();
@@ -33,7 +38,7 @@ export class MainBoxComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      this.chatBoxId = params.get('chatBoxId');
+      this.chatBoxParam = params.get('chatBoxParam');
     });
   }
 

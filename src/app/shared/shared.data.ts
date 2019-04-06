@@ -1,4 +1,4 @@
-import {UserModel} from '../model/UserModel';
+import {UserModel} from '../model/user.model';
 
 export class SharedData {
   public static loggedInUser: UserModel;
