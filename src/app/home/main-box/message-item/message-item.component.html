@@ -1,6 +1,6 @@
 <li [class]="messageDataItem.cssClass">
   <img [src]="messageDataItem.photoUrl">
   <p placement="{{messageDataItem.tooltipPlacement}}"
-     ngbTooltip="{{messageDataItem.date | date: 'EE, MMM dd, y HH:mm'}}">
+     ngbTooltip="{{messageDataItem.date | date: 'EE, dd/MM/yyyy HH:mm'}}">
     {{messageDataItem.content}}</p>
 </li>
