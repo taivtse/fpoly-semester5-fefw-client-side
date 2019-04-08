@@ -17,7 +17,7 @@ export class ChatItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.chatDataItemService.currentChatItemIndex.subscribe(index => {
+    this.chatDataItemService.chatItemIndex.asObservable().subscribe(index => {
       this.isActive = index === this.index;
     });
   }

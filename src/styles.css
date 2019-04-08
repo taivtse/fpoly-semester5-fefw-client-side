@@ -474,6 +474,7 @@ body {
   font-size: 0.9em;
   cursor: pointer;
   outline: none;
+  border-right: 5px solid #2C3E50;
 }
 
 @media screen and (max-width: 735px) {

@@ -6,7 +6,6 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class ChatDataItemService {
   chatItemIndex = new BehaviorSubject<number>(0);
-  currentChatItemIndex = this.chatItemIndex.asObservable();
 
   constructor() {
   }
