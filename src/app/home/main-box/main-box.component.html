@@ -8,7 +8,7 @@
       <i class="fa fa-instagram" aria-hidden="true"></i>
     </div>
   </div>
-  <app-chat-box [chatBoxDataItem]="currentChatBoxDataItem" #chatBoxComponent></app-chat-box>
+  <app-chat-box [chatBoxDataItem]="currentChatBoxDataItem"></app-chat-box>
   <div class="message-input">
     <div class="wrap">
       <input type="text" placeholder="Write your message..." #chattingInput (keyup)="keyUpEventHandler($event)">

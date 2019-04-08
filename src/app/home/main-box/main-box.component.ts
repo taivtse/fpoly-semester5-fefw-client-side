@@ -3,7 +3,7 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 import {MessageDataItem} from '../../model/message-data.item';
 import {ChatBoxDataItem} from '../../model/chat-box-data.item';
 import {SharedData} from '../../shared/shared.data';
-import {ChatBoxComponent} from './chat-box/chat-box.component';
+import {ChatDataItemService} from '../../shared/chat-data-item.service';
 
 @Component({
   selector: 'app-main-box',
@@ -12,13 +12,13 @@ import {ChatBoxComponent} from './chat-box/chat-box.component';
 })
 export class MainBoxComponent implements OnInit {
   @ViewChild('chattingInput') private chattingInput: ElementRef<HTMLInputElement>;
-  @ViewChild('chatBoxComponent') private chatBoxComponent: ChatBoxComponent;
 
   chatBoxParam: string;
   chatBoxDataItemMap = new Map<string, ChatBoxDataItem>();
   currentChatBoxDataItem: ChatBoxDataItem;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute,
+              private chatDataItemService: ChatDataItemService) {
     const message = new MessageDataItem();
     message.content = 'hello';
     message.date = new Date();
@@ -45,10 +45,25 @@ export class MainBoxComponent implements OnInit {
       this.chatBoxParam = params.get('chatBoxParam');
       this.currentChatBoxDataItem = this.chatBoxDataItemMap.get(this.chatBoxParam);
 
+      // set active for the chat item
+      this.chatDataItemService.changeActiveChatItemIndex(this.getChatItemIndex());
+
       // focus and set the current typing message
       this.chattingInput.nativeElement.focus();
       this.chattingInput.nativeElement.value = this.getCurrentTypingMessageInChatBox();
     });
+  }
+
+  getChatItemIndex(): number {
+    let index = -1;
+    for (const key of Array.from(this.chatBoxDataItemMap.keys())) {
+      index++;
+
+      if (key === this.chatBoxParam) {
+        return index;
+      }
+    }
+    return -1;
   }
 
   sendMessage(): void {
@@ -69,19 +84,20 @@ export class MainBoxComponent implements OnInit {
   progressAfterSendMessage() {
     this.chattingInput.nativeElement.focus();
     this.chattingInput.nativeElement.value = '';
-    this.chatBoxComponent.scrollToBottom();
-  }
-
-  setCurrentTypingMessageInChatBox() {
-    this.currentChatBoxDataItem.currentTypingMessage = this.chattingInput.nativeElement.value;
-  }
-
-  resetCurrentTypingMessageInChatBox() {
     this.currentChatBoxDataItem.currentTypingMessage = '';
   }
 
+  setCurrentTypingMessageInChatBox() {
+    if (this.currentChatBoxDataItem) {
+      this.currentChatBoxDataItem.currentTypingMessage = this.chattingInput.nativeElement.value;
+    }
+  }
+
   getCurrentTypingMessageInChatBox(): string {
-    return this.currentChatBoxDataItem.currentTypingMessage;
+    if (this.currentChatBoxDataItem) {
+      return this.currentChatBoxDataItem.currentTypingMessage;
+    }
+    return '';
   }
 
   keyUpEventHandler(event) {
@@ -89,7 +105,6 @@ export class MainBoxComponent implements OnInit {
 
     if (event.code === 'Enter') {
       this.sendMessage();
-      this.resetCurrentTypingMessageInChatBox();
     }
   }
 }
