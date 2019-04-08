@@ -485,11 +485,12 @@ body {
 
 #frame #side-bar #contacts ul li.contact:hover {
   background: #32465a;
+  border-right-color: #31465B;
 }
 
 #frame #side-bar #contacts ul li.contact.active {
   background: #32465a;
-  border-right: 5px solid #435f7a;
+  border-right-color: #435f7a;
 }
 
 #frame #side-bar #contacts ul li.contact.active span.contact-status {
