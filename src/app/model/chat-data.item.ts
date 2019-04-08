@@ -3,5 +3,5 @@ export class ChatDataItem {
   photoUrl: string;
   lastMessageContent: string;
   lastMessageDate: Date;
-
+  chatBoxParam: string;
 }

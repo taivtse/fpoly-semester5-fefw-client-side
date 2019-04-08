@@ -1,5 +1,7 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {SharedData} from '../../../shared/shared.data';
+import {ChatDataItem} from '../../../model/chat-data.item';
+import {ChatDataItemService} from '../../../shared/chat-data-item.service';
 
 @Component({
   selector: 'app-chat-item',
@@ -7,18 +9,20 @@ import {SharedData} from '../../../shared/shared.data';
   styleUrls: ['./chat-item.component.css']
 })
 export class ChatItemComponent implements OnInit {
+  @Input() chatDataItem: ChatDataItem;
+  @Input() index: number;
   isActive: boolean;
-  index: number;
 
-  constructor() {
+  constructor(private chatDataItemService: ChatDataItemService) {
   }
 
   ngOnInit() {
+    this.chatDataItemService.currentChatItemIndex.subscribe(index => {
+      this.isActive = index === this.index;
+    });
   }
 
   activeChatItem(): void {
-    // this.isActive = true;
-    SharedData.activeChatItemIndex = this.index;
-    console.log(SharedData.activeChatItemIndex);
+    this.chatDataItemService.changeActiveChatItemIndex(this.index);
   }
 }

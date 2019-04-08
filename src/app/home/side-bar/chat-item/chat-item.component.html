@@ -1,15 +1,16 @@
-<li class="contact {{isActive ? 'active' : ''}}" routerLink="/chat/tai" (click)="activeChatItem()">
+<li class="contact {{isActive ? 'active' : ''}}" [routerLink]="chatDataItem.chatBoxParam"
+    (click)="activeChatItem()">
   <div class="wrap">
     <span class="contact-status online"></span>
-    <img src="http://emilcarlsson.se/assets/louislitt.png" alt="">
+    <img [src]="chatDataItem.photoUrl">
     <div class="meta">
       <div class="d-flex align-items-center justify-content-between">
         <p class="name">
-          Louis LittLouis LittLouis LittLouis LittLouis Litt
+          {{chatDataItem.name}}
         </p>
-        <em>19/01/2019 19:09</em>
+        <em>{{chatDataItem.lastMessageDate | date:'dd/MM/yyyy HH:mm'}}</em>
       </div>
-      <p class="preview">You just got LITT up, Mike.</p>
+      <p class="preview">{{chatDataItem.lastMessageContent}}</p>
     </div>
   </div>
 </li>
