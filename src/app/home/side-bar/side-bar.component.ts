@@ -7,7 +7,7 @@ import {SharedData} from '../../shared/shared.data';
   styleUrls: ['./side-bar.component.css']
 })
 export class SideBarComponent implements OnInit {
-  @ViewChild('searchingInput') public searchingInput: ElementRef<HTMLInputElement>;
+  @ViewChild('searchingInput') private searchingInput: ElementRef<HTMLInputElement>;
 
   isSearching = false;
   sharedData = SharedData;
@@ -18,8 +18,7 @@ export class SideBarComponent implements OnInit {
   ngOnInit() {
   }
 
-  eventHandler(event) {
-    console.log(event.code);
+  keyUpEventHandler(event) {
     if (event.code === 'Escape') {
       this.searchingInput.nativeElement.blur();
       this.searchingInput.nativeElement.value = '';

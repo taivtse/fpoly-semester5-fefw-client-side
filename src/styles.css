@@ -744,13 +744,17 @@ body {
   display: inline-block;
   clear: both;
   float: left;
-  margin: 15px 15px 5px 15px;
+  margin: 0px 15px 5px 15px;
   width: calc(100% - 25px);
   font-size: 0.9em;
 }
 
-#frame .main-box .messages ul li:nth-last-child(1) {
+#frame .main-box .messages ul app-message-item:last-child li {
   margin-bottom: 20px;
+}
+
+#frame .main-box .messages ul app-message-item:first-child li {
+  margin-top: 20px;
 }
 
 #frame .main-box .messages ul li.sent img {
