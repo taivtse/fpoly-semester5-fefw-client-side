@@ -545,7 +545,6 @@ body {
 
 #frame #side-bar #contacts ul li.contact .wrap .meta {
   padding: 5px 0 0 0;
-  width: 235px;
 }
 
 @media screen and (max-width: 735px) {
@@ -555,7 +554,20 @@ body {
 }
 
 #frame #side-bar #contacts ul li.contact .wrap .meta .name {
+  text-overflow: ellipsis;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 140px;
   font-weight: 600;
+}
+
+#frame #side-bar #contacts ul li.contact .wrap .meta em {
+  color: #b9b9b9;
+  display: inline-block;
+  height: 100%;
+  font-weight: normal;
+  font-size: 0.9em;
 }
 
 #frame #side-bar #contacts ul li.contact .wrap .meta .name.search {
