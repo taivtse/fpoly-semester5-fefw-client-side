@@ -44,6 +44,10 @@ export class MainBoxComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.chatBoxParam = params.get('chatBoxParam');
       this.currentChatBoxDataItem = this.chatBoxDataItemMap.get(this.chatBoxParam);
+
+      // focus and set the current typing message
+      this.chattingInput.nativeElement.focus();
+      this.chattingInput.nativeElement.value = this.getCurrentTypingMessageInChatBox();
     });
   }
 
@@ -68,9 +72,24 @@ export class MainBoxComponent implements OnInit {
     this.chatBoxComponent.scrollToBottom();
   }
 
+  setCurrentTypingMessageInChatBox() {
+    this.currentChatBoxDataItem.currentTypingMessage = this.chattingInput.nativeElement.value;
+  }
+
+  resetCurrentTypingMessageInChatBox() {
+    this.currentChatBoxDataItem.currentTypingMessage = '';
+  }
+
+  getCurrentTypingMessageInChatBox(): string {
+    return this.currentChatBoxDataItem.currentTypingMessage;
+  }
+
   keyUpEventHandler(event) {
+    this.setCurrentTypingMessageInChatBox();
+
     if (event.code === 'Enter') {
       this.sendMessage();
+      this.resetCurrentTypingMessageInChatBox();
     }
   }
 }
