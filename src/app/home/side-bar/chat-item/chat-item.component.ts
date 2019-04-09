@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {SharedData} from '../../../shared/shared.data';
 import {ChatDataItem} from '../../../model/chat-data.item';
 import {ChatDataItemService} from '../../../shared/chat-data-item.service';
@@ -11,18 +11,13 @@ import {ChatDataItemService} from '../../../shared/chat-data-item.service';
 export class ChatItemComponent implements OnInit {
   @Input() chatDataItem: ChatDataItem;
   @Input() index: number;
-  isActive: boolean;
-
-  constructor(private chatDataItemService: ChatDataItemService) {
-  }
+  @Input() isActive: boolean;
+  @Output() chatItemIndexChange = new EventEmitter<number>();
 
   ngOnInit() {
-    this.chatDataItemService.chatItemIndex.asObservable().subscribe(index => {
-      this.isActive = index === this.index;
-    });
   }
 
   activeChatItem(): void {
-    this.chatDataItemService.changeActiveChatItemIndex(this.index);
+    this.chatItemIndexChange.emit(this.index);
   }
 }

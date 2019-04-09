@@ -19,12 +19,15 @@ export class MainBoxComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private chatDataItemService: ChatDataItemService) {
+  }
+
+  ngOnInit() {
     const message = new MessageDataItem();
     message.content = 'hello';
     message.date = new Date();
     message.cssClass = 'sent';
     message.tooltipPlacement = 'left';
-    message.photoUrl = 'https://graph.facebook.com/982392238618347/picture?type=normal';
+    message.photoUrl = 'https://scontent.fsgn5-4.fna.fbcdn.net/v/t1.0-1/p100x100/47288746_914790362045202_3910511029439692800_n.jpg?_nc_cat=104&_nc_ht=scontent.fsgn5-4.fna&oh=40fbc7fda2f4a2ea46186fccc3bfa14e&oe=5D343857';
     const chatbox: ChatBoxDataItem = new ChatBoxDataItem();
     chatbox.messageDataItems.push(message);
     this.chatBoxDataItemMap.set('tai', chatbox);
@@ -38,20 +41,18 @@ export class MainBoxComponent implements OnInit {
     const chatbox1: ChatBoxDataItem = new ChatBoxDataItem();
     chatbox1.messageDataItems.push(message1);
     this.chatBoxDataItemMap.set('my', chatbox1);
-  }
 
-  ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.chatBoxParam = params.get('chatBoxParam');
       this.currentChatBoxDataItem = this.chatBoxDataItemMap.get(this.chatBoxParam);
-
-      // set active for the chat item
-      this.chatDataItemService.changeActiveChatItemIndex(this.getChatItemIndex());
 
       // focus and set the current typing message
       this.chattingInput.nativeElement.focus();
       this.chattingInput.nativeElement.value = this.getCurrentTypingMessageInChatBox();
     });
+
+    // set active for the chat item
+    this.chatDataItemService.changeActiveChatItemIndex(this.getChatItemIndex());
   }
 
   getChatItemIndex(): number {
@@ -85,6 +86,9 @@ export class MainBoxComponent implements OnInit {
     this.chattingInput.nativeElement.focus();
     this.chattingInput.nativeElement.value = '';
     this.currentChatBoxDataItem.currentTypingMessage = '';
+
+    //  set current chat item to top
+    this.chatDataItemService.moveCurrentActiveChatItemToTop();
   }
 
   setCurrentTypingMessageInChatBox() {

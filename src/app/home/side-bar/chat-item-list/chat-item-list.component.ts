@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ChatDataItem} from '../../../model/chat-data.item';
+import {ChatDataItemService} from '../../../shared/chat-data-item.service';
 
 @Component({
   selector: 'app-chat-item-list',
@@ -7,19 +8,19 @@ import {ChatDataItem} from '../../../model/chat-data.item';
   styleUrls: ['./chat-item-list.component.css']
 })
 export class ChatItemListComponent implements OnInit {
-  chatDataItems: ChatDataItem[] = [];
+  currentActiveChatItemIndex: number;
 
-  constructor() {
+  constructor(private chatDataItemService: ChatDataItemService) {
   }
 
   ngOnInit() {
     const chatDataItem1 = new ChatDataItem();
     chatDataItem1.name = 'Võ Thành Tài';
     chatDataItem1.photoUrl = 'https://graph.facebook.com/982392238618347/picture?type=normal';
-    chatDataItem1.lastMessageContent = 'Xin chao ban minh';
+    chatDataItem1.lastMessageContent = 'Xin chao ban tai';
     chatDataItem1.lastMessageDate = new Date();
     chatDataItem1.chatBoxParam = '/chat/tai';
-    this.chatDataItems.push(chatDataItem1);
+    this.chatDataItemService.chatDataItems.push(chatDataItem1);
 
     const chatDataItem2 = new ChatDataItem();
     chatDataItem2.name = 'Trần Hải My';
@@ -27,17 +28,14 @@ export class ChatItemListComponent implements OnInit {
     chatDataItem2.lastMessageContent = 'Xin chao ban my';
     chatDataItem2.lastMessageDate = new Date();
     chatDataItem2.chatBoxParam = '/chat/my';
-    this.chatDataItems.push(chatDataItem2);
-    // this.a.asdfsa = 1;
-    // this.a.push(1);
-    // this.a.push(3);
-    // this.a.push(2);
-    // const index = 1;
-    // const temp = this.a[index];
-    // this.a.splice(index, 1);
-    // this.a.push(temp);
-    // console.log(this.a);
+    this.chatDataItemService.chatDataItems.push(chatDataItem2);
 
-    // this.a.
+    this.chatDataItemService.getCurrentChatItemIndex().subscribe(index => {
+      this.currentActiveChatItemIndex = index;
+    });
+  }
+
+  changeActiveChatItem(index: number) {
+    this.chatDataItemService.changeActiveChatItemIndex(index);
   }
 }
