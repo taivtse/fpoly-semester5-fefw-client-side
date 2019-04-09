@@ -12,7 +12,7 @@ export class ChatDataItemService {
   constructor() {
   }
 
-  getCurrentChatItemIndex(): Observable<number> {
+  getActiveChatItemIndex(): Observable<number> {
     return this.currentChatItemIndex.asObservable();
   }
 
@@ -20,16 +20,16 @@ export class ChatDataItemService {
     this.currentChatItemIndex.next(index);
   }
 
-  moveCurrentActiveChatItemToTop(): void {
-    let currentActiveChatItemIndex = 0;
-    this.getCurrentChatItemIndex().subscribe(index => currentActiveChatItemIndex = index).unsubscribe();
+  moveActiveChatItemToTop(): void {
+    let activeChatItemIndex = 0;
+    this.getActiveChatItemIndex().subscribe(index => activeChatItemIndex = index).unsubscribe();
 
-    if (currentActiveChatItemIndex === 0) {
+    if (activeChatItemIndex === 0) {
       return;
     }
 
-    const temp = this.chatDataItems[currentActiveChatItemIndex];
-    this.chatDataItems.splice(currentActiveChatItemIndex, 1);
+    const temp = this.chatDataItems[activeChatItemIndex];
+    this.chatDataItems.splice(activeChatItemIndex, 1);
     this.chatDataItems.unshift(temp);
 
     this.changeActiveChatItemIndex(0);

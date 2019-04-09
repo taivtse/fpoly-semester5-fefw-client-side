@@ -30,7 +30,7 @@ export class ChatItemListComponent implements OnInit {
     chatDataItem2.chatBoxParam = '/chat/my';
     this.chatDataItemService.chatDataItems.push(chatDataItem2);
 
-    this.chatDataItemService.getCurrentChatItemIndex().subscribe(index => {
+    this.chatDataItemService.getActiveChatItemIndex().subscribe(index => {
       this.currentActiveChatItemIndex = index;
     });
   }

@@ -48,7 +48,7 @@ export class MainBoxComponent implements OnInit {
 
       // focus and set the current typing message
       this.chattingInput.nativeElement.focus();
-      this.chattingInput.nativeElement.value = this.getCurrentTypingMessageInChatBox();
+      this.chattingInput.nativeElement.value = this.getCurrentTypingMessageInChatInput();
     });
 
     // set active for the chat item
@@ -79,25 +79,31 @@ export class MainBoxComponent implements OnInit {
     messageDataItem.cssClass = 'sent';
 
     this.chatBoxDataItemMap.get(this.chatBoxParam).messageDataItems.push(messageDataItem);
-    this.progressAfterSendMessage();
+    this.progressAfterSendMessage(messageDataItem);
   }
 
-  progressAfterSendMessage() {
+  progressAfterSendMessage(messageDataItem: MessageDataItem) {
     this.chattingInput.nativeElement.focus();
     this.chattingInput.nativeElement.value = '';
     this.currentChatBoxDataItem.currentTypingMessage = '';
 
     //  set current chat item to top
-    this.chatDataItemService.moveCurrentActiveChatItemToTop();
+    this.chatDataItemService.moveActiveChatItemToTop();
+
+    //  set last message content and last message date in chat item
+    let activeChatItemIndex = 0;
+    this.chatDataItemService.getActiveChatItemIndex().subscribe(index => activeChatItemIndex = index).unsubscribe();
+    this.chatDataItemService.chatDataItems[activeChatItemIndex].lastMessageContent = messageDataItem.content;
+    this.chatDataItemService.chatDataItems[activeChatItemIndex].lastMessageDate = messageDataItem.date;
   }
 
-  setCurrentTypingMessageInChatBox() {
+  setCurrentTypingMessageInChatInput() {
     if (this.currentChatBoxDataItem) {
       this.currentChatBoxDataItem.currentTypingMessage = this.chattingInput.nativeElement.value;
     }
   }
 
-  getCurrentTypingMessageInChatBox(): string {
+  getCurrentTypingMessageInChatInput(): string {
     if (this.currentChatBoxDataItem) {
       return this.currentChatBoxDataItem.currentTypingMessage;
     }
@@ -105,7 +111,7 @@ export class MainBoxComponent implements OnInit {
   }
 
   keyUpEventHandler(event) {
-    this.setCurrentTypingMessageInChatBox();
+    this.setCurrentTypingMessageInChatInput();
 
     if (event.code === 'Enter') {
       this.sendMessage();

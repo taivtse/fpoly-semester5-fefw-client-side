@@ -766,6 +766,7 @@ body {
   background: #435f7a;
   color: #f5f5f5;
   float: right;
+  overflow-wrap: break-word;
 }
 
 #frame .main-box .messages ul li.replies img {
@@ -828,15 +829,17 @@ body {
 }
 
 #frame .main-box .message-input .wrap .attachment {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
-  right: 60px;
-  top: 2px;
-  z-index: 4;
-  margin-top: 10px;
-  font-size: 1.1em;
+  right: 50px;
   color: #435f7a;
-  opacity: 0.5;
+  width: 50px;
+  height: 100%;
+  background-color: #FFF;
   cursor: pointer;
+
 }
 
 @media screen and (max-width: 735px) {
