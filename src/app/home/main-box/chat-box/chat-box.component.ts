@@ -9,17 +9,23 @@ import {ChatBoxDataItem} from '../../../model/chat-box-data.item';
 export class ChatBoxComponent implements OnInit, AfterViewChecked {
   @Input() chatBoxDataItem: ChatBoxDataItem;
   @ViewChild('messagesWrapper') private messagesWrapper: ElementRef;
+  private messageDataItemLength = 0;
 
   constructor() {
   }
 
   ngOnInit() {
+    this.messageDataItemLength = this.chatBoxDataItem.messageDataItems.length;
     this.scrollToBottom();
   }
 
 
   ngAfterViewChecked(): void {
-    this.scrollToBottom();
+    const newMessageDataItemLength = this.chatBoxDataItem.messageDataItems.length;
+    if (this.messageDataItemLength !== newMessageDataItemLength) {
+      this.messageDataItemLength = newMessageDataItemLength;
+      this.scrollToBottom();
+    }
   }
 
   scrollToBottom(): void {
