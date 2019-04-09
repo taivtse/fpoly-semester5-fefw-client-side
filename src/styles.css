@@ -843,14 +843,7 @@ body {
 }
 
 @media screen and (max-width: 735px) {
-  #frame .main-box .message-input .wrap .attachment {
-    margin-top: 17px;
-    right: 65px;
-  }
-}
 
-#frame .main-box .message-input .wrap .attachment:hover {
-  opacity: 1;
 }
 
 #frame .main-box .message-input .wrap button {
