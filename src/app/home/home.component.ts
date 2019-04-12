@@ -20,23 +20,20 @@ export class HomeComponent implements OnInit {
     this.homeService.checkSessionIn()
       .then(res => {
         if (res === false) {
-          this.router.navigate(['login']);
+          this.router.navigateByUrl('login');
         }
         this.isFinishCheckSessionIn = true;
       })
       .then(() => {
-        if (this.chatDataItemService.chatDataItems.length == 0) {
-          this.loadChatBoxDataItemsAndRouting();
-        }
+        this.loadChatBoxDataItemsAndRouting();
       })
       .catch((err) => {
         console.log(err);
-        this.router.navigate(['']);
+        this.router.navigateByUrl('');
       });
   }
 
   loadChatBoxDataItemsAndRouting(): void {
-    console.log('call');
     this.homeService.loadChatBoxDataItems()
       .then(() => {
         console.log(this.chatDataItemService.chatDataItems);

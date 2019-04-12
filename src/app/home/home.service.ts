@@ -27,7 +27,6 @@ export class HomeService {
     return this.httpClient.get(ConstantData.API_CHATBOX_ENDPOINT, {params}).toPromise()
       .then(chatDataItemList => {
         (chatDataItemList as Array<ChatDataItem>).forEach(chatDataItem => {
-          // chatDataItem.chatBoxParam = '/chat/' + chatDataItem.chatBoxParam;
           this.chatDataItemService.chatDataItems.push(chatDataItem);
         });
       });

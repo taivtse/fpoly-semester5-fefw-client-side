@@ -10,11 +10,19 @@ import {SearchUserListComponent} from './side-bar/search-user-list/search-user-l
 import {SearchUserComponent} from './side-bar/search-user/search-user.component';
 import {ChatBoxComponent} from './main-box/chat-box/chat-box.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { MessageItemComponent } from './main-box/message-item/message-item.component';
+import {MessageItemComponent} from './main-box/message-item/message-item.component';
 
 const routes: Routes = [
-  {path: 'chat', component: HomeComponent},
-  {path: 'chat/:chatBoxParam', component: HomeComponent},
+  {
+    path: 'chat',
+    component: HomeComponent,
+    children: [
+      {
+        path: ':chatBoxParam',
+        component: MainBoxComponent
+      }
+    ]
+  },
 ];
 
 @NgModule({
