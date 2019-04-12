@@ -4,6 +4,7 @@ import {MessageDataItem} from '../../model/message-data.item';
 import {ChatBoxDataItem} from '../../model/chat-box-data.item';
 import {SharedData} from '../../shared/shared.data';
 import {ChatDataItemService} from '../../shared/chat-data-item.service';
+import {ChatDataItem} from '../../model/chat-data.item';
 
 @Component({
   selector: 'app-main-box',
@@ -12,10 +13,12 @@ import {ChatDataItemService} from '../../shared/chat-data-item.service';
 })
 export class MainBoxComponent implements OnInit {
   @ViewChild('chattingInput') private chattingInput: ElementRef<HTMLInputElement>;
-
+  boxName: string;
+  boxPhotoUrl: string;
   chatBoxParam: string;
   chatBoxDataItemMap = new Map<string, ChatBoxDataItem>();
   currentChatBoxDataItem: ChatBoxDataItem;
+  isShowChatBox: boolean;
 
   constructor(private route: ActivatedRoute,
               private chatDataItemService: ChatDataItemService) {
@@ -43,12 +46,12 @@ export class MainBoxComponent implements OnInit {
     this.chatBoxDataItemMap.set('my', chatbox1);
 
     this.route.paramMap.subscribe((params: ParamMap) => {
+      // set current chat box data item
       this.chatBoxParam = params.get('chatBoxParam');
       this.currentChatBoxDataItem = this.chatBoxDataItemMap.get(this.chatBoxParam);
 
       // set name and photo url for current chat box data item
-      this.currentChatBoxDataItem.name = this.chatDataItemService.getActiveChatDataItem().name;
-      this.currentChatBoxDataItem.photoUrl = this.chatDataItemService.getActiveChatDataItem().photoUrl;
+      this.setBoxNameAndPhotoUrl();
 
       // focus and set the current typing message
       this.chattingInput.nativeElement.focus();
@@ -57,6 +60,17 @@ export class MainBoxComponent implements OnInit {
 
     // set active for the chat item
     this.chatDataItemService.changeActiveChatItemIndex(this.getChatItemIndex());
+
+    // set name and photo url for current chat box data item
+    this.setBoxNameAndPhotoUrl();
+  }
+
+  private setBoxNameAndPhotoUrl() {
+    const activeChatDataItem = this.chatDataItemService.getActiveChatDataItem();
+    if (activeChatDataItem) {
+      this.boxName = activeChatDataItem.name;
+      this.boxPhotoUrl = activeChatDataItem.photoUrl;
+    }
   }
 
   getChatItemIndex(): number {

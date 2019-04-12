@@ -1,4 +1,5 @@
 export class ChatDataItem {
+  id: number;
   name: string;
   photoUrl: string;
   lastMessageContent: string;

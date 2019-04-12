@@ -18,12 +18,12 @@ export class LoginComponent implements OnInit {
     this.loginService.checkSessionIn()
       .then(res => {
         if (res === true) {
-          this.router.navigateByUrl('chat');
+          this.router.navigate(['chat']);
         }
         this.isFinishCheckSessionIn = true;
       }).catch((err) => {
       console.log(err);
-      this.router.navigateByUrl('');
+      this.router.navigate(['']);
     });
   }
 
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     this.loginService.login()
       .then(() => {
         SharedData.isLoggedIn = true;
-        this.router.navigateByUrl('chat');
+        this.router.navigate(['chat']);
       }).catch(err => {
       console.log(err);
       SharedData.isLoggedIn = false;

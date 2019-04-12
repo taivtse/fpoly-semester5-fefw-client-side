@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ChatDataItem} from '../../../model/chat-data.item';
 import {ChatDataItemService} from '../../../shared/chat-data-item.service';
 
 @Component({
