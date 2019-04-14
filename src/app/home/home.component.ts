@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {HomeService} from './home.service';
 import {ChatDataItemService} from '../shared/chat-data-item.service';
-import {ChatBoxDataItem} from '../model/chat-box-data.item';
 
 @Component({
   selector: 'app-home',
@@ -22,11 +21,10 @@ export class HomeComponent implements OnInit {
       .then(res => {
         if (res === false) {
           this.router.navigateByUrl('login');
+        } else {
+          this.loadChatBoxDataItemsAndRouting();
+          this.isFinishCheckSessionIn = true;
         }
-        this.isFinishCheckSessionIn = true;
-      })
-      .then(() => {
-        this.loadChatBoxDataItemsAndRouting();
       })
       .catch((err) => {
         console.log(err);

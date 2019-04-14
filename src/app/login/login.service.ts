@@ -30,7 +30,7 @@ export class LoginService {
         return this.userAuthApiService.updateAuthUserData(SharedData.loggedInUser);
       })
       .then(resUser => {
-        SharedData.loggedInUser = Object.assign(SharedData.loggedInUser, resUser);
+        Object.assign(SharedData.loggedInUser, resUser);
         StorageUtil.setLocalStorage(ConstantData.LOGGED_IN_USER_KEY, SharedData.loggedInUser);
       });
   }

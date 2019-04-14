@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {MessageDataItem} from '../../model/message-data.item';
 import {ChatBoxDataItem} from '../../model/chat-box-data.item';

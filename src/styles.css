@@ -562,6 +562,8 @@ body {
   overflow: hidden;
   max-width: 140px;
   font-weight: 600;
+  height: 17px;
+  line-height: 17px;
 }
 
 #frame #side-bar #contacts ul li.contact .wrap .meta em {
