@@ -1,16 +1,6 @@
 <div id="contacts" class="">
   <ul>
-    <app-search-user></app-search-user>
-    <app-search-user></app-search-user>
-    <app-search-user></app-search-user>
-    <app-search-user></app-search-user>
-    <app-search-user></app-search-user>
-    <app-search-user></app-search-user>
-    <app-search-user></app-search-user>
-    <app-search-user></app-search-user>
-    <app-search-user></app-search-user>
-    <app-search-user></app-search-user>
-    <app-search-user></app-search-user>
-    <app-search-user></app-search-user>
+    <app-search-user *ngFor="let searchUserModel of searchUserModels"
+                     [searchUserModel]="searchUserModel"></app-search-user>
   </ul>
 </div>

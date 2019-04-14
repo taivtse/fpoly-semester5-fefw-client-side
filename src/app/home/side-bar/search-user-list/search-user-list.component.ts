@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {SearchUserModel} from '../../../model/search-user.model';
 
 @Component({
   selector: 'app-search-user-list',
@@ -6,7 +7,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./search-user-list.component.css']
 })
 export class SearchUserListComponent implements OnInit {
-
+  @Input() searchUserModels: SearchUserModel[];
   constructor() { }
 
   ngOnInit() {

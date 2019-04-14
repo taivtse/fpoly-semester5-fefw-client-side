@@ -1,8 +1,8 @@
 <li class="contact">
-  <div class="wrap">
-    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="">
+  <div class="wrap" *ngIf="searchUserModel">
+    <img [src]="searchUserModel.photoUrl">
     <div class="meta">
-      <p class="name search">Harvey Specter</p>
+      <p class="name search">{{searchUserModel.name}}</p>
       <div class="clearfix"></div>
     </div>
   </div>
