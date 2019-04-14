@@ -26,26 +26,35 @@ export class MainBoxComponent implements OnInit {
     this.chatDataItemService.chatDataItemsNotify.subscribe(() => {
       this.chatDataItemService.chatDataItems.forEach(chatDataItem => {
         if (!this.chatBoxDataItemMap.has(chatDataItem.chatBoxParam)) {
-          this.chatBoxDataItemMap.set(chatDataItem.chatBoxParam, new ChatBoxDataItem());
+          const newChatBoxDataItem = new ChatBoxDataItem();
+          newChatBoxDataItem.id = chatDataItem.id;
+          this.chatBoxDataItemMap.set(chatDataItem.chatBoxParam, newChatBoxDataItem);
         }
       });
 
-      this.route.paramMap.subscribe((params: ParamMap) => {
-        // set current chat box data item
-        this.chatBoxParam = params.get('chatBoxParam');
-        this.currentChatBoxDataItem = this.chatBoxDataItemMap.get(this.chatBoxParam);
+      if (this.chatDataItemService.isChatDataItemsLoaded) {
+        this.route.paramMap.subscribe((params: ParamMap) => {
+          // set current chat box data item
+          this.chatBoxParam = params.get('chatBoxParam');
+          this.currentChatBoxDataItem = this.chatBoxDataItemMap.get(this.chatBoxParam);
 
-        // set name and photo url for current chat box data item
-        this.setBoxNameAndPhotoUrl();
+          // load chat box messages
+          if (this.currentChatBoxDataItem) {
 
-        // focus and set the current typing message
-        this.chattingInput.nativeElement.focus();
-        this.chattingInput.nativeElement.value = this.getCurrentTypingMessageInChatInput();
-      });
+          }
 
-      // set active for the chat item
-      const activeChatItemIndex = this.getChatItemIndex();
-      this.chatDataItemService.changeActiveChatItemIndex(activeChatItemIndex);
+          // set name and photo url for current chat box data item
+          this.setBoxNameAndPhotoUrl();
+
+          // focus and set the current typing message
+          this.chattingInput.nativeElement.focus();
+          this.chattingInput.nativeElement.value = this.getCurrentTypingMessageInChatInput();
+        });
+
+        // set active for the chat item
+        const activeChatItemIndex = this.getChatItemIndex();
+        this.chatDataItemService.changeActiveChatItemIndex(activeChatItemIndex);
+      }
     });
   }
 
