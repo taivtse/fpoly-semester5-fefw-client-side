@@ -22,11 +22,12 @@ export class HomeService {
 
   loadChatBoxDataItems(): Promise<any> {
     let params = new HttpParams();
-    params = params.append('page', String(SharedData.chatBoxListLoadTime));
     params = params.append('userId', String(SharedData.loggedInUser.id));
     return this.httpClient.get(ConstantData.API_CHATBOX_ENDPOINT, {params}).toPromise()
       .then(chatDataItemList => {
-        this.chatDataItemService.addChatDataItems((chatDataItemList as Array<ChatDataItem>));
+        this.chatDataItemService.chatDataItems = (chatDataItemList as Array<ChatDataItem>);
+        this.chatDataItemService.isChatDataItemsLoaded = true;
+        this.chatDataItemService.chatDataItemsNotify.next(null);
       });
   }
 }

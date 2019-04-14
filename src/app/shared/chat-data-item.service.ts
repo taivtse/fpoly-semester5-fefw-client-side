@@ -6,8 +6,10 @@ import {ChatDataItem} from '../model/chat-data.item';
   providedIn: 'root'
 })
 export class ChatDataItemService {
+  isChatDataItemsLoaded = false;
+  chatDataItemsNotify = new BehaviorSubject(null);
   chatDataItems: ChatDataItem[] = [];
-  currentChatItemIndex = new BehaviorSubject<number>(0);
+  private activeChatItemIndex = new BehaviorSubject<number>(0);
 
   constructor() {
   }
@@ -19,11 +21,11 @@ export class ChatDataItemService {
   }
 
   getActiveChatItemIndex(): Observable<number> {
-    return this.currentChatItemIndex.asObservable();
+    return this.activeChatItemIndex.asObservable();
   }
 
   changeActiveChatItemIndex(index: number): void {
-    this.currentChatItemIndex.next(index);
+    this.activeChatItemIndex.next(index);
   }
 
   moveActiveChatItemToTop(): void {

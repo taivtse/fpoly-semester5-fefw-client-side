@@ -1,6 +1,8 @@
 <div class="main-box">
   <div class="contact-profile">
-    <img [src]="boxPhotoUrl" alt="">
+    <ng-container *ngIf="boxPhotoUrl">
+      <img [src]="boxPhotoUrl" alt="">
+    </ng-container>
     <p>{{boxName}}</p>
     <div class="social-media">
       <i class="fa fa-facebook" aria-hidden="true"></i>

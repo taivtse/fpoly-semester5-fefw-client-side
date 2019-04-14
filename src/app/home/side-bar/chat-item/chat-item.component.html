@@ -1,4 +1,4 @@
-<li class="contact {{isActive ? 'active' : ''}}" [routerLink]="chatDataItem.chatBoxParam"
+<li class="contact {{isActive ? 'active' : ''}}" [routerLink]="'/chat/' + chatDataItem.chatBoxParam"
     (click)="activeChatItem()">
   <div class="wrap">
     <span class="contact-status online"></span>

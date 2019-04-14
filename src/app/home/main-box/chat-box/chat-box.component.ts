@@ -15,16 +15,20 @@ export class ChatBoxComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit() {
-    this.messageDataItemLength = this.chatBoxDataItem.messageDataItems.length;
-    this.scrollToBottom();
+    if (this.chatBoxDataItem) {
+      this.messageDataItemLength = this.chatBoxDataItem.messageDataItems.length;
+      this.scrollToBottom();
+    }
   }
 
 
   ngAfterViewChecked(): void {
-    const newMessageDataItemLength = this.chatBoxDataItem.messageDataItems.length;
-    if (this.messageDataItemLength !== newMessageDataItemLength) {
-      this.messageDataItemLength = newMessageDataItemLength;
-      this.scrollToBottom();
+    if (this.chatBoxDataItem) {
+      const newMessageDataItemLength = this.chatBoxDataItem.messageDataItems.length;
+      if (this.messageDataItemLength !== newMessageDataItemLength) {
+        this.messageDataItemLength = newMessageDataItemLength;
+        this.scrollToBottom();
+      }
     }
   }
 

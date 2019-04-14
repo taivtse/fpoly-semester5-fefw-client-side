@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {HomeService} from './home.service';
 import {ChatDataItemService} from '../shared/chat-data-item.service';
+import {ChatBoxDataItem} from '../model/chat-box-data.item';
 
 @Component({
   selector: 'app-home',
@@ -36,8 +37,9 @@ export class HomeComponent implements OnInit {
   loadChatBoxDataItemsAndRouting(): void {
     this.homeService.loadChatBoxDataItems()
       .then(() => {
-        if (this.chatDataItemService.getChatDataItemsLength() > 0 && this.router.url === '/chat/loading') {
-          this.router.navigate(['/chat/', this.chatDataItemService.getChatDataItemsValues()[0].chatBoxParam]);
+        if (this.chatDataItemService.chatDataItems.length > 0 && this.router.url === '/chat/loading') {
+          this.router.navigate(['/chat', this.chatDataItemService.chatDataItems[0].chatBoxParam]);
+          this.chatDataItemService.changeActiveChatItemIndex(0);
         }
       });
   }
