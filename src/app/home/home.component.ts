@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 import {HomeService} from './home.service';
 import {ChatDataItemService} from '../shared/chat-data-item.service';
 
@@ -36,9 +36,8 @@ export class HomeComponent implements OnInit {
   loadChatBoxDataItemsAndRouting(): void {
     this.homeService.loadChatBoxDataItems()
       .then(() => {
-        console.log(this.chatDataItemService.chatDataItems);
-        if (this.chatDataItemService.chatDataItems.length > 0) {
-          this.router.navigate([/chat/, this.chatDataItemService.chatDataItems[0].chatBoxParam]);
+        if (this.chatDataItemService.getChatDataItemsLength() > 0 && this.router.url === '/chat/loading') {
+          this.router.navigate(['/chat/', this.chatDataItemService.getChatDataItemsValues()[0].chatBoxParam]);
         }
       });
   }

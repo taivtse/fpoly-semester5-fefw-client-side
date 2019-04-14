@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     this.loginService.checkSessionIn()
       .then(res => {
         if (res === true) {
-          this.router.navigateByUrl('chat');
+          this.router.navigateByUrl('chat/loading');
         }
         this.isFinishCheckSessionIn = true;
       }).catch((err) => {
@@ -30,11 +30,9 @@ export class LoginComponent implements OnInit {
   socialLogIn() {
     this.loginService.login()
       .then(() => {
-        SharedData.isLoggedIn = true;
-        this.router.navigateByUrl('chat');
+        this.router.navigateByUrl('chat/loading');
       }).catch(err => {
       console.log(err);
-      SharedData.isLoggedIn = false;
     });
   }
 

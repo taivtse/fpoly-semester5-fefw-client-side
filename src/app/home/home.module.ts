@@ -13,16 +13,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MessageItemComponent} from './main-box/message-item/message-item.component';
 
 const routes: Routes = [
-  {
-    path: 'chat',
-    component: HomeComponent,
-    children: [
-      {
-        path: ':chatBoxParam',
-        component: MainBoxComponent
-      }
-    ]
-  },
+  {path: 'chat/:chatBoxParam', component: HomeComponent},
+  {path: 'chat', redirectTo: 'chat/loading'},
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({

@@ -26,9 +26,7 @@ export class HomeService {
     params = params.append('userId', String(SharedData.loggedInUser.id));
     return this.httpClient.get(ConstantData.API_CHATBOX_ENDPOINT, {params}).toPromise()
       .then(chatDataItemList => {
-        (chatDataItemList as Array<ChatDataItem>).forEach(chatDataItem => {
-          this.chatDataItemService.chatDataItems.push(chatDataItem);
-        });
+        this.chatDataItemService.addChatDataItems((chatDataItemList as Array<ChatDataItem>));
       });
   }
 }
