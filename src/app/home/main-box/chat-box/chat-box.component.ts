@@ -46,7 +46,7 @@ export class ChatBoxComponent implements OnInit, AfterViewChecked, OnChanges {
           const messageDataItem: MessageDataItem = new MessageDataItem();
           Object.assign(messageDataItem, messageModel);
 
-          if (messageModel.memberId === SharedData.loggedInUser.id) {
+          if (messageModel.userId === SharedData.loggedInUser.id) {
             messageDataItem.tooltipPlacement = 'left';
             messageDataItem.photoUrl = SharedData.loggedInUser.photoUrl;
             messageDataItem.cssClass = 'sent';

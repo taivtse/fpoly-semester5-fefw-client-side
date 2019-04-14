@@ -24,8 +24,8 @@ export class HomeService {
     let params = new HttpParams();
     params = params.append('userId', String(SharedData.loggedInUser.id));
     return this.httpClient.get(ConstantData.API_CHATBOX_ENDPOINT, {params}).toPromise()
-      .then(chatDataItemList => {
-        this.chatDataItemService.chatBoxModels = (chatDataItemList as Array<ChatBoxModel>);
+      .then(chatBoxModels => {
+        this.chatDataItemService.chatBoxModels = (chatBoxModels as Array<ChatBoxModel>);
         this.chatDataItemService.isChatDataItemsLoaded = true;
         this.chatDataItemService.chatDataItemsNotify.next(null);
       });

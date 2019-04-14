@@ -6,5 +6,6 @@ export class ChatBoxDataItem {
   name: string;
   photoUrl: string;
   currentTypingMessage = '';
+  memberId: number;
   messageDataItems: Array<MessageDataItem> = [];
 }

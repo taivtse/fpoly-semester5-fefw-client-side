@@ -22,13 +22,13 @@ export class MainBoxComponent implements OnInit {
 
   ngOnInit() {
     this.chatDataItemService.chatDataItemsNotify.subscribe(() => {
-      this.chatDataItemService.chatBoxModels.forEach(chatDataItem => {
-        if (!this.chatBoxDataItemMap.has(chatDataItem.chatBoxParam)) {
+      this.chatDataItemService.chatBoxModels.forEach(chatBoxModel => {
+        if (!this.chatBoxDataItemMap.has(chatBoxModel.chatBoxParam)) {
           const chatBoxDataItem = new ChatBoxDataItem();
-          chatBoxDataItem.id = chatDataItem.id;
-          chatBoxDataItem.name = chatDataItem.name;
-          chatBoxDataItem.photoUrl = chatDataItem.photoUrl;
-          this.chatBoxDataItemMap.set(chatDataItem.chatBoxParam, chatBoxDataItem);
+          chatBoxDataItem.id = chatBoxModel.id;
+          chatBoxDataItem.name = chatBoxModel.name;
+          chatBoxDataItem.photoUrl = chatBoxModel.photoUrl;
+          this.chatBoxDataItemMap.set(chatBoxModel.chatBoxParam, chatBoxDataItem);
         }
       });
 
