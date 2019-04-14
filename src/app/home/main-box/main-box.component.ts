@@ -12,8 +12,6 @@ import {ChatDataItemService} from '../../shared/chat-data-item.service';
 })
 export class MainBoxComponent implements OnInit {
   @ViewChild('chattingInput') private chattingInput: ElementRef<HTMLInputElement>;
-  boxName: string;
-  boxPhotoUrl: string;
   chatBoxParam: string;
   chatBoxDataItemMap = new Map<string, ChatBoxDataItem>();
   currentChatBoxDataItem: ChatBoxDataItem;
@@ -24,11 +22,13 @@ export class MainBoxComponent implements OnInit {
 
   ngOnInit() {
     this.chatDataItemService.chatDataItemsNotify.subscribe(() => {
-      this.chatDataItemService.chatDataItems.forEach(chatDataItem => {
+      this.chatDataItemService.chatBoxModels.forEach(chatDataItem => {
         if (!this.chatBoxDataItemMap.has(chatDataItem.chatBoxParam)) {
-          const newChatBoxDataItem = new ChatBoxDataItem();
-          newChatBoxDataItem.id = chatDataItem.id;
-          this.chatBoxDataItemMap.set(chatDataItem.chatBoxParam, newChatBoxDataItem);
+          const chatBoxDataItem = new ChatBoxDataItem();
+          chatBoxDataItem.id = chatDataItem.id;
+          chatBoxDataItem.name = chatDataItem.name;
+          chatBoxDataItem.photoUrl = chatDataItem.photoUrl;
+          this.chatBoxDataItemMap.set(chatDataItem.chatBoxParam, chatBoxDataItem);
         }
       });
 
@@ -37,14 +37,6 @@ export class MainBoxComponent implements OnInit {
           // set current chat box data item
           this.chatBoxParam = params.get('chatBoxParam');
           this.currentChatBoxDataItem = this.chatBoxDataItemMap.get(this.chatBoxParam);
-
-          // load chat box messages
-          if (this.currentChatBoxDataItem) {
-
-          }
-
-          // set name and photo url for current chat box data item
-          this.setBoxNameAndPhotoUrl();
 
           // focus and set the current typing message
           this.chattingInput.nativeElement.focus();
@@ -56,14 +48,6 @@ export class MainBoxComponent implements OnInit {
         this.chatDataItemService.changeActiveChatItemIndex(activeChatItemIndex);
       }
     });
-  }
-
-  private setBoxNameAndPhotoUrl() {
-    const activeChatDataItem = this.chatDataItemService.getActiveChatDataItem();
-    if (activeChatDataItem) {
-      this.boxName = activeChatDataItem.name;
-      this.boxPhotoUrl = activeChatDataItem.photoUrl;
-    }
   }
 
   getChatItemIndex(): number {
@@ -101,8 +85,8 @@ export class MainBoxComponent implements OnInit {
     this.chatDataItemService.moveActiveChatItemToTop();
 
     //  set last message content and last message date in chat item
-    this.chatDataItemService.chatDataItems[0].lastMessageContent = messageDataItem.content;
-    this.chatDataItemService.chatDataItems[0].lastMessageDate = messageDataItem.date;
+    this.chatDataItemService.chatBoxModels[0].lastMessageContent = messageDataItem.content;
+    this.chatDataItemService.chatBoxModels[0].lastMessageDate = messageDataItem.date;
   }
 
   setCurrentTypingMessageInChatInput() {

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {ChatDataItem} from '../model/chat-data.item';
+import {ChatBoxModel} from '../model/chat-box.model';
 
 @Injectable({
   providedIn: 'root'
@@ -8,16 +8,16 @@ import {ChatDataItem} from '../model/chat-data.item';
 export class ChatDataItemService {
   isChatDataItemsLoaded = false;
   chatDataItemsNotify = new BehaviorSubject(null);
-  chatDataItems: ChatDataItem[] = [];
+  chatBoxModels: ChatBoxModel[] = [];
   private activeChatItemIndex = new BehaviorSubject<number>(0);
 
   constructor() {
   }
 
-  getActiveChatDataItem(): ChatDataItem {
+  getActiveChatDataItem(): ChatBoxModel {
     let activeChatItemIndex = 0;
     this.getActiveChatItemIndex().subscribe(index => activeChatItemIndex = index).unsubscribe();
-    return this.chatDataItems[activeChatItemIndex];
+    return this.chatBoxModels[activeChatItemIndex];
   }
 
   getActiveChatItemIndex(): Observable<number> {
@@ -36,9 +36,9 @@ export class ChatDataItemService {
       return;
     }
 
-    const temp = this.chatDataItems[activeChatItemIndex];
-    this.chatDataItems.splice(activeChatItemIndex, 1);
-    this.chatDataItems.unshift(temp);
+    const temp = this.chatBoxModels[activeChatItemIndex];
+    this.chatBoxModels.splice(activeChatItemIndex, 1);
+    this.chatBoxModels.unshift(temp);
 
     this.changeActiveChatItemIndex(0);
   }

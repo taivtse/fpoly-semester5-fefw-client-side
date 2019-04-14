@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ChatDataItem} from '../../../model/chat-data.item';
+import {ChatBoxModel} from '../../../model/chat-box.model';
 
 @Component({
   selector: 'app-chat-item',
@@ -7,7 +7,7 @@ import {ChatDataItem} from '../../../model/chat-data.item';
   styleUrls: ['./chat-item.component.css']
 })
 export class ChatItemComponent implements OnInit {
-  @Input() chatDataItem: ChatDataItem;
+  @Input() chatDataItem: ChatBoxModel;
   @Input() index: number;
   @Input() isActive: boolean;
   @Output() chatItemIndexChange = new EventEmitter<number>();

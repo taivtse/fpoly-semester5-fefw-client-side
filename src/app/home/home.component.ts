@@ -37,8 +37,8 @@ export class HomeComponent implements OnInit {
   loadChatBoxDataItemsAndRouting(): void {
     this.homeService.loadChatBoxDataItems()
       .then(() => {
-        if (this.chatDataItemService.chatDataItems.length > 0 && this.router.url === '/chat/loading') {
-          this.router.navigate(['/chat', this.chatDataItemService.chatDataItems[0].chatBoxParam]);
+        if (this.chatDataItemService.chatBoxModels.length > 0 && this.router.url === '/chat/loading') {
+          this.router.navigate(['/chat', this.chatDataItemService.chatBoxModels[0].chatBoxParam]);
           this.chatDataItemService.changeActiveChatItemIndex(0);
         }
       });

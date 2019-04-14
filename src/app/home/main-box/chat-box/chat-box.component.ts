@@ -1,5 +1,9 @@
 import {AfterViewChecked, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ChatBoxDataItem} from '../../../model/chat-box-data.item';
+import {ChatBoxService} from './chat-box.service';
+import {MessageModel} from '../../../model/message.model';
+import {MessageDataItem} from '../../../model/message-data.item';
+import {SharedData} from '../../../shared/shared.data';
 
 @Component({
   selector: 'app-chat-box',
@@ -11,7 +15,7 @@ export class ChatBoxComponent implements OnInit, AfterViewChecked, OnChanges {
   @ViewChild('messagesWrapper') private messagesWrapper: ElementRef;
   private messageDataItemLength = 0;
 
-  constructor() {
+  constructor(private chatBoxService: ChatBoxService) {
   }
 
   ngOnInit() {
@@ -37,7 +41,24 @@ export class ChatBoxComponent implements OnInit, AfterViewChecked, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.chatBoxDataItem && this.chatBoxDataItem.messageDataItems.length === 0) {
-      console.log('change call');
+      this.chatBoxService.getMessagesByChatBoxId(this.chatBoxDataItem.id).then(messageModels => {
+        (messageModels as MessageModel[]).forEach(messageModel => {
+          const messageDataItem: MessageDataItem = new MessageDataItem();
+          Object.assign(messageDataItem, messageModel);
+
+          if (messageModel.memberId === SharedData.loggedInUser.id) {
+            messageDataItem.tooltipPlacement = 'left';
+            messageDataItem.photoUrl = SharedData.loggedInUser.photoUrl;
+            messageDataItem.cssClass = 'sent';
+          } else {
+            messageDataItem.tooltipPlacement = 'right';
+            messageDataItem.photoUrl = this.chatBoxDataItem.photoUrl;
+            messageDataItem.cssClass = 'replies';
+          }
+
+          this.chatBoxDataItem.messageDataItems.push(messageDataItem);
+        });
+      });
     }
   }
 }

@@ -1,9 +1,9 @@
 <div class="main-box">
   <div class="contact-profile">
-    <ng-container *ngIf="boxPhotoUrl">
-      <img [src]="boxPhotoUrl" alt="">
+    <ng-container *ngIf="currentChatBoxDataItem">
+      <img [src]="currentChatBoxDataItem.photoUrl" alt="">
+      <p>{{currentChatBoxDataItem.name}}</p>
     </ng-container>
-    <p>{{boxName}}</p>
     <div class="social-media">
       <i class="fa fa-facebook" aria-hidden="true"></i>
       <i class="fa fa-twitter" aria-hidden="true"></i>

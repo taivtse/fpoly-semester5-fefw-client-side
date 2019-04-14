@@ -4,7 +4,7 @@ import {UserAuthApiService} from '../shared/user-auth-api.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {ChatDataItemService} from '../shared/chat-data-item.service';
 import {ConstantData} from '../shared/constant.data';
-import {ChatDataItem} from '../model/chat-data.item';
+import {ChatBoxModel} from '../model/chat-box.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class HomeService {
     params = params.append('userId', String(SharedData.loggedInUser.id));
     return this.httpClient.get(ConstantData.API_CHATBOX_ENDPOINT, {params}).toPromise()
       .then(chatDataItemList => {
-        this.chatDataItemService.chatDataItems = (chatDataItemList as Array<ChatDataItem>);
+        this.chatDataItemService.chatBoxModels = (chatDataItemList as Array<ChatBoxModel>);
         this.chatDataItemService.isChatDataItemsLoaded = true;
         this.chatDataItemService.chatDataItemsNotify.next(null);
       });

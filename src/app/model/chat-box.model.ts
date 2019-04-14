@@ -1,4 +1,4 @@
-export class ChatDataItem {
+export class ChatBoxModel {
   id: number;
   name: string;
   photoUrl: string;
