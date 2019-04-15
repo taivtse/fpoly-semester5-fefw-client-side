@@ -1,9 +1,11 @@
-<li class="contact">
-  <div class="wrap" *ngIf="searchUserModel">
-    <img [src]="searchUserModel.photoUrl">
-    <div class="meta">
-      <p class="name search">{{searchUserModel.name}}</p>
-      <div class="clearfix"></div>
+<ng-container *ngIf="searchUserModel">
+  <li class="contact" (click)="addNewChatBox()">
+    <div class="wrap">
+      <img [src]="searchUserModel.photoUrl">
+      <div class="meta">
+        <p class="name search">{{searchUserModel.name}}</p>
+        <div class="clearfix"></div>
+      </div>
     </div>
-  </div>
-</li>
+  </li>
+</ng-container>

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SearchUserModel} from '../../../model/search-user.model';
 
 @Component({
@@ -8,9 +8,14 @@ import {SearchUserModel} from '../../../model/search-user.model';
 })
 export class SearchUserListComponent implements OnInit {
   @Input() searchUserModels: SearchUserModel[];
+  @Output() searchUserClick = new EventEmitter<number>();
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  addNewChatBox(index: number) {
+    this.searchUserClick.emit(index);
+  }
 }

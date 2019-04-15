@@ -1,6 +1,8 @@
 <div id="contacts" class="">
   <ul>
-    <app-search-user *ngFor="let searchUserModel of searchUserModels"
-                     [searchUserModel]="searchUserModel"></app-search-user>
+    <app-search-user *ngFor="let searchUserModel of searchUserModels; let i = index"
+                     [searchUserModel]="searchUserModel"
+                     [index]="i"
+                     (searchUserClick)="addNewChatBox($event)"></app-search-user>
   </ul>
 </div>

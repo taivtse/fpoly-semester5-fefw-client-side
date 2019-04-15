@@ -33,6 +33,9 @@ export class MainBoxComponent implements OnInit {
       });
 
       if (this.chatDataItemService.isChatDataItemsLoaded) {
+        // subscribe param once
+        this.chatDataItemService.isChatDataItemsLoaded = false;
+
         this.route.paramMap.subscribe((params: ParamMap) => {
           // set current chat box data item
           this.chatBoxParam = params.get('chatBoxParam');

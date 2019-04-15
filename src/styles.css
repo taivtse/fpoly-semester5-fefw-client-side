@@ -112,8 +112,8 @@ body {
   #frame #side-bar #profile {
     width: 100%;
     margin: 0 auto;
-    padding: 5px 0 0 0;
-    background: #495e73;
+    padding: 9px 0 0 5px;
+    background: #3d5164;
   }
 }
 
@@ -147,7 +147,7 @@ body {
 
 @media screen and (max-width: 735px) {
   #frame #side-bar #profile .wrap {
-    height: 55px;
+    height: 51px;
   }
 }
 
