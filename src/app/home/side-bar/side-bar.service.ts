@@ -32,9 +32,10 @@ export class SideBarService {
     const chatBoxModel: ChatBoxModel = new ChatBoxModel();
     chatBoxModel.name = searchUserModel.name;
     chatBoxModel.photoUrl = searchUserModel.photoUrl;
-    chatBoxModel.lastMessageContent = '...';
+    chatBoxModel.lastMessageContent = 'Enter new message...';
     chatBoxModel.lastMessageDate = null;
     chatBoxModel.chatBoxParam = searchUserModel.providerId;
+    chatBoxModel.readStatus = true;
     this.chatDataItemService.chatBoxModels.unshift(chatBoxModel);
     this.chatDataItemService.chatDataItemsNotify.next(null);
     this.chatDataItemService.changeActiveChatItemIndex(0);

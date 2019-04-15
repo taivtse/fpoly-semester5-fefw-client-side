@@ -88,7 +88,7 @@ export class MainBoxComponent implements OnInit {
     this.chatDataItemService.moveActiveChatItemToTop();
 
     //  set last message content and last message date in chat item
-    this.chatDataItemService.chatBoxModels[0].lastMessageContent = messageDataItem.content;
+    this.chatDataItemService.chatBoxModels[0].lastMessageContent = 'You: ' + messageDataItem.content;
     this.chatDataItemService.chatBoxModels[0].lastMessageDate = messageDataItem.date;
   }
 

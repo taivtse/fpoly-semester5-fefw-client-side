@@ -5,4 +5,5 @@ export class ChatBoxModel {
   lastMessageContent: string;
   lastMessageDate: Date;
   chatBoxParam: string;
+  readStatus: boolean;
 }

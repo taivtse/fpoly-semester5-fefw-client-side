@@ -1,7 +1,7 @@
 <div id="contacts" class="">
   <ul>
     <app-chat-item *ngFor="let chatDataItem of chatBoxModels; let i = index"
-                   [chatDataItem]="chatDataItem"
+                   [chatBoxModel]="chatDataItem"
                    [index]="i"
                    [isActive]="i === currentActiveChatItemIndex"
                    (chatItemIndexChange)="changeActiveChatItem($event)"

@@ -546,7 +546,7 @@ body {
 }
 
 #frame #side-bar #contacts ul li.contact .wrap .meta {
-  padding: 5px 0 0 0;
+  padding: 2px 0 0 0;
 }
 
 @media screen and (max-width: 735px) {
@@ -579,7 +579,7 @@ body {
 }
 
 #frame #side-bar #contacts ul li.contact .wrap .meta .preview {
-  margin: 5px 0 0 0;
+  margin: 3px 0 0 0;
   padding: 0 0 1px;
   font-weight: 400;
   white-space: nowrap;
@@ -598,7 +598,17 @@ body {
   border: none;
   padding: 0 2px 0 0;
   margin: 0 0 0 1px;
-  opacity: 0.5;
+}
+
+#frame #side-bar #contacts ul li.contact .wrap .meta .preview span.messages-content {
+  display: inline-block;
+  width: 75%;
+  height: 15px;
+  line-height: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: 1s all ease;;
 }
 
 #frame #side-bar #bottom-bar {
