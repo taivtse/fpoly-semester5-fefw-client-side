@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ConstantData} from '../../../shared/constant.data';
 import {SharedData} from '../../../shared/shared.data';
-import {StringifyOptions} from 'querystring';
 
 @Injectable({
   providedIn: 'root'

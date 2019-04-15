@@ -561,7 +561,6 @@ body {
   white-space: nowrap;
   overflow: hidden;
   max-width: 140px;
-  font-weight: 600;
   height: 17px;
   line-height: 17px;
 }
@@ -585,10 +584,6 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  -moz-transition: 1s all ease;
-  -o-transition: 1s all ease;
-  -webkit-transition: 1s all ease;
-  transition: 1s all ease;
 }
 
 #frame #side-bar #contacts ul li.contact .wrap .meta .preview span {
@@ -608,7 +603,20 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: 1s all ease;;
+  color: #b9b9b9;
+}
+
+#frame #side-bar #contacts ul li.contact .wrap .meta.unread .name {
+  font-weight: bold;
+  color: #fff;
+}
+
+#frame #side-bar #contacts ul li.contact .wrap .meta.unread .preview span.messages-content {
+  color: #fff;
+}
+
+#frame #side-bar #contacts ul li.contact .wrap .meta.unread .date {
+  color: #0b94ff;
 }
 
 #frame #side-bar #bottom-bar {
