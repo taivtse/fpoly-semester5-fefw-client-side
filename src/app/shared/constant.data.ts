@@ -9,6 +9,8 @@ export class ConstantData {
   public static readonly API_SEARCH_USER_ENDPOINT = ConstantData.API_USER_ENDPOINT.concat('/search');
   public static readonly API_MEMBER_ENDPOINT = ConstantData.API_ENDPOINT.concat('/member');
 
+  public static readonly SERVER_SOCKET_ENDPOINT = 'http://localhost:7991/ws';
+
   public static readonly LOGGED_IN_USER_KEY = 'loggedInUser';
 
   constructor() {

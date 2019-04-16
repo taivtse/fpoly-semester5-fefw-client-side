@@ -4,6 +4,7 @@ import {MessageDataItem} from '../../model/message-data.item';
 import {ChatBoxDataItem} from '../../model/chat-box-data.item';
 import {SharedData} from '../../shared/shared.data';
 import {ChatDataItemService} from '../../shared/chat-data-item.service';
+import {ChatService} from '../../shared/chat.service';
 
 @Component({
   selector: 'app-main-box',
@@ -17,10 +18,12 @@ export class MainBoxComponent implements OnInit {
   currentChatBoxDataItem: ChatBoxDataItem;
 
   constructor(private route: ActivatedRoute,
-              private chatDataItemService: ChatDataItemService) {
+              private chatDataItemService: ChatDataItemService,
+              private chatService: ChatService) {
   }
 
   ngOnInit() {
+    this.chatService.connect(this.onMessageReceived);
     this.chatDataItemService.chatDataItemsNotify.subscribe(() => {
       this.chatDataItemService.chatBoxModels.forEach(chatBoxModel => {
         if (!this.chatBoxDataItemMap.has(chatBoxModel.chatBoxParam)) {
@@ -51,6 +54,10 @@ export class MainBoxComponent implements OnInit {
         this.chatDataItemService.changeActiveChatItemIndex(activeChatItemIndex);
       }
     });
+  }
+
+  onMessageReceived(body) {
+    console.log(body);
   }
 
   getChatItemIndex(): number {
