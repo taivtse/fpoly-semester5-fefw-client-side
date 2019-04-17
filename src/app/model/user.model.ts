@@ -1,9 +1,9 @@
 export class UserModel {
-  id: number;
-  email: string;
-  name: string;
-  provider: string;
-  providerId: string;
-  photoUrl: string;
-  token: string;
+  id: number = null;
+  email: string = null;
+  name: string = null;
+  provider: string = null;
+  providerId: string = null;
+  photoUrl: string = null;
+  token: string = null;
 }

@@ -1,6 +1,6 @@
 export class SearchUserModel {
-  id: number;
-  name: string;
-  photoUrl: string;
-  providerId: string;
+  id: number = null;
+  name: string = null;
+  photoUrl: string = null;
+  providerId: string = null;
 }

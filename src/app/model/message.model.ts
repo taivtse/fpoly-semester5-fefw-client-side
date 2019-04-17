@@ -1,8 +1,8 @@
 export class MessageModel {
-  id: number;
-  content: string;
-  date: Date;
-  type: string;
-  memberId: number;
-  userId: number;
+  id: number = null;
+  content: string = null;
+  date: Date = null;
+  type: string = null;
+  memberId: number = null;
+  userId: number = null;
 }
