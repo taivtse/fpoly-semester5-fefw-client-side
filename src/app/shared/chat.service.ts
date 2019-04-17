@@ -3,8 +3,7 @@ import {ConstantData} from './constant.data';
 import * as SockJS from 'sockjs-client';
 import {SharedData} from './shared.data';
 import {CompatClient, IMessage, Message, Stomp, StompSubscription} from '@stomp/stompjs';
-import {MessageSocketModel} from '../model/message-socket.model';
-import {SocketDataModel} from '../model/socket-data.model';
+import {SocketMessageModel} from '../model/socket-message.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,15 +28,17 @@ export class ChatService {
     }, (error) => this.onError(error));
   }
 
-  sendMessage(socketDataModel: SocketDataModel): void {
-    const topic = `/app/chat/send/${socketDataModel.receivedProviderId}`;
+  sendMessage(socketMessageModel: SocketMessageModel): Promise<any> {
+    const topic = `/app/chat/send/${socketMessageModel.receivedUserProviderId}`;
     const headers = {
       token: SharedData.loggedInUser.token
     };
-    this.stompClient.send(topic,
-      headers,
-      JSON.stringify(socketDataModel)
-    );
+    return new Promise<any>(() => {
+      this.stompClient.send(topic,
+        headers,
+        JSON.stringify(socketMessageModel)
+      );
+    });
   }
 
   onError(error) {

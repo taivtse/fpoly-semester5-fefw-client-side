@@ -14,7 +14,12 @@ export class AppComponent {
   constructor(private titleService: Title) {
     this.titleService.setTitle('Connect Now');
 
-    SharedData.loggedInUser = StorageUtil.getLocalStorage(ConstantData.LOGGED_IN_USER_KEY) as UserModel;
+    try {
+      SharedData.loggedInUser = StorageUtil.getLocalStorage(ConstantData.LOGGED_IN_USER_KEY) as UserModel;
+    } catch (e) {
+      StorageUtil.removeLocalStorage(ConstantData.LOGGED_IN_USER_KEY);
+    }
+
     if (SharedData.loggedInUser == null) {
       SharedData.loggedInUser = new UserModel();
     }

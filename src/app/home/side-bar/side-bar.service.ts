@@ -4,6 +4,7 @@ import {ConstantData} from '../../shared/constant.data';
 import {SearchUserModel} from '../../model/search-user.model';
 import {ChatDataItemService} from '../../shared/chat-data-item.service';
 import {ChatBoxModel} from '../../model/chat-box.model';
+import {SharedData} from '../../shared/shared.data';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class SideBarService {
   loadSearchUser(name: string): Promise<any> {
     let params = new HttpParams();
     params = params.append('name', name);
+    params = params.append('userId', String(SharedData.loggedInUser.id));
     return this.httpClient.get(ConstantData.API_SEARCH_USER_ENDPOINT, {params}).toPromise();
   }
 
