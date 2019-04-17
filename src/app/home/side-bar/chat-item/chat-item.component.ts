@@ -13,7 +13,6 @@ export class ChatItemComponent implements OnInit, OnChanges {
   @Input() isActive: boolean;
   @Output() chatItemIndexChange = new EventEmitter<number>();
 
-
   constructor(private chatItemService: ChatItemService) {
   }
 

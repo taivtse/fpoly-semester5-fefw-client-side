@@ -2,29 +2,33 @@ import {Injectable} from '@angular/core';
 import {ConstantData} from './constant.data';
 import * as SockJS from 'sockjs-client';
 import {SharedData} from './shared.data';
-import {CompatClient, IMessage, Message, Stomp, StompSubscription} from '@stomp/stompjs';
+import {CompatClient, Message, Stomp, StompSubscription} from '@stomp/stompjs';
 import {SocketMessageModel} from '../model/socket-message.model';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {MemberModel} from '../model/member.model';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ChatService {
+  isSocketAvailable = false;
   // socket
-  private stompClient: CompatClient;
-  private chanelSubscription: StompSubscription;
+  stompClient: CompatClient;
+  chanelSubscription: StompSubscription;
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
   }
 
-  connect(onMessageReceivedCallBack) {
+  connect(instance, onMessageReceivedCallBack) {
     const socket = new SockJS(ConstantData.SERVER_SOCKET_ENDPOINT);
     this.stompClient = Stomp.over(socket);
 
     this.stompClient.connect({}, (frame) => {
       const channelId = SharedData.loggedInUser.providerId;
       this.chanelSubscription = this.stompClient.subscribe(`/channel/${channelId}`,
-        (message: Message) => onMessageReceivedCallBack(message.body));
+        (message: Message) => onMessageReceivedCallBack(instance, message.body));
+      this.isSocketAvailable = true;
     }, (error) => this.onError(error));
   }
 
@@ -33,15 +37,32 @@ export class ChatService {
     const headers = {
       token: SharedData.loggedInUser.token
     };
-    return new Promise<any>(() => {
+    return new Promise<any>((resolve, reject) => {
       this.stompClient.send(topic,
         headers,
         JSON.stringify(socketMessageModel)
       );
+      resolve(socketMessageModel);
     });
   }
 
   onError(error) {
     console.log(error);
+  }
+
+  getChatBoxDataItemByMemberId(memberId: number): Promise<any> {
+    let params = new HttpParams();
+    params = params.append('memberId', String(memberId));
+    params = params.append('userId', String(SharedData.loggedInUser.id));
+    return this.httpClient.get(ConstantData.API_CHATBOX_ENDPOINT.concat('/find-by/member'), {params})
+      .toPromise();
+  }
+
+  createNewChatBox(): Promise<any> {
+    return this.httpClient.post(ConstantData.API_CHATBOX_ENDPOINT, {}).toPromise();
+  }
+
+  createNewMember(memberModel: MemberModel): Promise<any> {
+    return this.httpClient.post(ConstantData.API_MEMBER_ENDPOINT, memberModel).toPromise();
   }
 }

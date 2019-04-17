@@ -14,10 +14,16 @@ export class ChatDataItemService {
   constructor() {
   }
 
-  getActiveChatDataItem(): ChatBoxModel {
+  getActiveChatBoxModel(): ChatBoxModel {
     let activeChatItemIndex = 0;
     this.getActiveChatItemIndex().subscribe(index => activeChatItemIndex = index).unsubscribe();
     return this.chatBoxModels[activeChatItemIndex];
+  }
+
+  setActiveChatBoxModel(chatBoxModel: ChatBoxModel): void {
+    let activeChatItemIndex = 0;
+    this.getActiveChatItemIndex().subscribe(index => activeChatItemIndex = index).unsubscribe();
+    this.chatBoxModels[activeChatItemIndex] = chatBoxModel;
   }
 
   getActiveChatItemIndex(): Observable<number> {
@@ -41,6 +47,25 @@ export class ChatDataItemService {
     this.chatBoxModels.unshift(temp);
 
     this.changeActiveChatItemIndex(0);
+  }
+
+  moveChatItemToTop(chatItemIndex: number): void {
+    let activeChatItemIndex = 0;
+    this.getActiveChatItemIndex().subscribe(index => activeChatItemIndex = index).unsubscribe();
+
+    if (chatItemIndex === -1 || chatItemIndex > this.chatBoxModels.length) {
+      return;
+    }
+
+    const temp = this.chatBoxModels[chatItemIndex];
+    this.chatBoxModels.splice(chatItemIndex, 1);
+    this.chatBoxModels.unshift(temp);
+
+    if (activeChatItemIndex < chatItemIndex) {
+      this.changeActiveChatItemIndex(activeChatItemIndex + 1);
+    } else if (activeChatItemIndex === chatItemIndex) {
+      this.changeActiveChatItemIndex(0);
+    }
   }
 
 }

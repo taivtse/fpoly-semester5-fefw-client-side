@@ -38,6 +38,7 @@ export class SideBarService {
     chatBoxModel.lastMessageDate = null;
     chatBoxModel.chatBoxParam = searchUserModel.providerId;
     chatBoxModel.readStatus = true;
+    chatBoxModel.partnerUserId = searchUserModel.id;
     this.chatDataItemService.chatBoxModels.unshift(chatBoxModel);
     this.chatDataItemService.chatDataItemsNotify.next(null);
     this.chatDataItemService.changeActiveChatItemIndex(0);

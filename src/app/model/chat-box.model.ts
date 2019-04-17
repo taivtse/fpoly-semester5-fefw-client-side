@@ -7,4 +7,5 @@ export class ChatBoxModel {
   chatBoxParam: string = null;
   readStatus: boolean = null;
   memberId: number = null;
+  partnerUserId: number = null;
 }

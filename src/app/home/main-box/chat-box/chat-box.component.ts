@@ -4,6 +4,7 @@ import {ChatBoxService} from './chat-box.service';
 import {MessageModel} from '../../../model/message.model';
 import {MessageDataItem} from '../../../model/message-data.item';
 import {SharedData} from '../../../shared/shared.data';
+import {BeanUtil} from '../../../shared/bean.util';
 
 @Component({
   selector: 'app-chat-box',
@@ -44,7 +45,7 @@ export class ChatBoxComponent implements OnInit, AfterViewChecked, OnChanges {
       this.chatBoxService.getMessagesByChatBoxId(this.chatBoxDataItem.id).then(messageModels => {
         (messageModels as MessageModel[]).forEach(messageModel => {
           const messageDataItem: MessageDataItem = new MessageDataItem();
-          Object.assign(messageDataItem, messageModel);
+          BeanUtil.copyProperties(messageDataItem, messageModel);
 
           if (messageModel.userId === SharedData.loggedInUser.id) {
             messageDataItem.tooltipPlacement = 'left';

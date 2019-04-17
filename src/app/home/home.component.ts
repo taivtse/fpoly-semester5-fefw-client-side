@@ -55,6 +55,8 @@ export class HomeComponent implements OnInit {
               this.chatDataItemService.changeActiveChatItemIndex(0);
             }
           }
+        } else {
+          this.router.navigateByUrl('/chat/loading');
         }
       });
   }

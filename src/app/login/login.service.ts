@@ -4,6 +4,7 @@ import {ConstantData} from '../shared/constant.data';
 import {StorageUtil} from '../shared/storage.util';
 import {UserAuthApiService} from '../shared/user-auth-api.service';
 import {SharedData} from '../shared/shared.data';
+import {BeanUtil} from '../shared/bean.util';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class LoginService {
         return this.userAuthApiService.updateAuthUserData(SharedData.loggedInUser);
       })
       .then(resUser => {
-        Object.assign(SharedData.loggedInUser, resUser);
+        BeanUtil.copyProperties(SharedData.loggedInUser, resUser);
         StorageUtil.setLocalStorage(ConstantData.LOGGED_IN_USER_KEY, SharedData.loggedInUser);
       });
   }

@@ -796,6 +796,7 @@ body {
 #frame .main-box .messages ul li.replies p {
   background: #F5F5F5;
   color: #303030;
+  overflow-wrap: break-word;
 }
 
 #frame .main-box .messages ul li img {
