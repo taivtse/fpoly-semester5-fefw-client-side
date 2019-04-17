@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ChatBoxModel} from '../../../model/chat-box.model';
 import {ChatItemService} from './chat-item.service';
+import {SharedData} from '../../../shared/shared.data';
 
 @Component({
   selector: 'app-chat-item',
@@ -12,11 +13,13 @@ export class ChatItemComponent implements OnInit, OnChanges {
   @Input() index: number;
   @Input() isActive: boolean;
   @Output() chatItemIndexChange = new EventEmitter<number>();
+  private isLastMessageOfMe: boolean;
 
   constructor(private chatItemService: ChatItemService) {
   }
 
   ngOnInit() {
+    this.isLastMessageOfMe = this.chatBoxModel.lastMessageUserId === SharedData.loggedInUser.id;
   }
 
   activeChatItem(): void {

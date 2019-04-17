@@ -34,6 +34,12 @@ export class ChatDataItemService {
     this.activeChatItemIndex.next(index);
   }
 
+  changeActiveChatItemPlusOne(): void {
+    let activeChatItemIndex = 0;
+    this.getActiveChatItemIndex().subscribe(index => activeChatItemIndex = index).unsubscribe();
+    this.activeChatItemIndex.next(activeChatItemIndex + 1);
+  }
+
   moveActiveChatItemToTop(): void {
     let activeChatItemIndex = 0;
     this.getActiveChatItemIndex().subscribe(index => activeChatItemIndex = index).unsubscribe();

@@ -1,5 +1,5 @@
 <!--[hidden]="!this.chatService.isSocketAvailable"-->
-<div class="main-box">
+<div class="main-box" [hidden]="!isShowMainBox">
   <div class="contact-profile">
     <ng-container *ngIf="currentChatBoxDataItem">
       <img [src]="currentChatBoxDataItem.photoUrl" alt="">
@@ -14,7 +14,9 @@
   <app-chat-box [chatBoxDataItem]="currentChatBoxDataItem"></app-chat-box>
   <div class="message-input">
     <div class="wrap">
-      <input type="text" placeholder="Write your message..." #chattingInput (keyup)="onKeyEventHandler($event)">
+      <input type="text" placeholder="Write your message..." #chattingInput
+             (keypress)="onKeyPressEventHandler($event)"
+             (keyup)="onKeyUpEventHandler($event)">
       <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
       <button class="submit" (click)="onSendMessage()"><i class="fa fa-paper-plane" aria-hidden="true"></i>
       </button>

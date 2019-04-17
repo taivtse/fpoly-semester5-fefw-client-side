@@ -22,6 +22,7 @@ export class MainBoxComponent implements OnInit, OnDestroy {
   chatBoxParam: string;
   chatBoxDataItemMap = new Map<string, ChatBoxDataItem>();
   currentChatBoxDataItem: ChatBoxDataItem;
+  isShowMainBox = false;
 
   constructor(private route: ActivatedRoute,
               private chatDataItemService: ChatDataItemService,
@@ -42,6 +43,7 @@ export class MainBoxComponent implements OnInit, OnDestroy {
       if (this.chatDataItemService.isChatDataItemsLoaded) {
         // subscribe param once
         this.chatDataItemService.isChatDataItemsLoaded = false;
+        this.isShowMainBox = true;
 
         this.route.paramMap.subscribe((params: ParamMap) => {
           // set current chat box data item
@@ -72,14 +74,13 @@ export class MainBoxComponent implements OnInit, OnDestroy {
   }
 
   onSendMessage(): void {
-    if (this.chattingInput.nativeElement.value === '') {
+    if (this.chattingInput.nativeElement.value.trim() === '') {
       return;
     }
 
     // process if chat box not already exists
     const socketMessageModel = new SocketMessageModel();
     const activeChatBoxModel = this.chatDataItemService.getActiveChatBoxModel();
-    debugger
     if (this.currentChatBoxDataItem.id == null) {
       this.chatService.createNewChatBox()
         .then((chatBoxModel: ChatBoxModel) => {
@@ -174,6 +175,7 @@ export class MainBoxComponent implements OnInit, OnDestroy {
         .then((chatBoxModel: ChatBoxModel) => {
           _this.chatDataItemService.chatBoxModels.unshift(chatBoxModel);
           _this.chatDataItemService.chatDataItemsNotify.next(null);
+          _this.chatDataItemService.changeActiveChatItemPlusOne();
           _this.chatBoxDataItemMap.get(sentUserProviderId).messageDataItems.push(messageDataItem);
         });
     }
@@ -205,9 +207,11 @@ export class MainBoxComponent implements OnInit, OnDestroy {
     return '';
   }
 
-  onKeyEventHandler(event) {
+  onKeyUpEventHandler(event) {
     this.setCurrentTypingMessageInChatInput();
+  }
 
+  onKeyPressEventHandler(event) {
     if (event.code === 'Enter') {
       this.onSendMessage();
     }

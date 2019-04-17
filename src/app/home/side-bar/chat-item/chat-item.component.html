@@ -13,6 +13,7 @@
       </div>
       <p class="preview">
         <span class="messages-content">
+          {{isLastMessageOfMe ? 'You: ' : ''}}
           {{chatBoxModel.lastMessageContent}}
         </span>
         <b class="badge badge-secondary float-right"

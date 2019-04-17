@@ -4,6 +4,7 @@ export class ChatBoxModel {
   photoUrl: string = null;
   lastMessageContent: string = null;
   lastMessageDate: Date = null;
+  lastMessageUserId: number = null;
   chatBoxParam: string = null;
   readStatus: boolean = null;
   memberId: number = null;
