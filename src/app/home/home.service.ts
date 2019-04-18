@@ -25,9 +25,11 @@ export class HomeService {
     params = params.append('userId', String(SharedData.loggedInUser.id));
     return this.httpClient.get(ConstantData.API_CHATBOX_ENDPOINT, {params}).toPromise()
       .then(chatBoxModels => {
-        this.chatDataItemService.chatBoxModels = (chatBoxModels as Array<ChatBoxModel>);
-        this.chatDataItemService.isChatDataItemsLoaded = true;
-        this.chatDataItemService.chatDataItemsNotify.next(null);
+        if ((chatBoxModels as Array<ChatBoxModel>).length > 0) {
+          this.chatDataItemService.chatBoxModels = (chatBoxModels as Array<ChatBoxModel>);
+          this.chatDataItemService.isChatDataItemsLoaded = true;
+          this.chatDataItemService.chatDataItemsNotify.next(null);
+        }
       });
   }
 }

@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {MessageDataItem} from '../../model/message-data.item';
 import {ChatBoxDataItem} from '../../model/chat-box-data.item';
 import {SharedData} from '../../shared/shared.data';
@@ -25,6 +25,7 @@ export class MainBoxComponent implements OnInit, OnDestroy {
   isShowMainBox = false;
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private chatDataItemService: ChatDataItemService,
               private chatService: ChatService) {
   }
@@ -39,6 +40,12 @@ export class MainBoxComponent implements OnInit, OnDestroy {
           this.chatBoxDataItemMap.set(chatBoxModel.chatBoxParam, chatBoxDataItem);
         }
       });
+
+      if (this.chatDataItemService.chatBoxModels.length === 1) {
+        this.chatDataItemService.isChatDataItemsLoaded = true;
+        this.chatDataItemService.chatBoxModels[0].readStatus = true;
+        this.router.navigate(['/chat', this.chatDataItemService.chatBoxModels[0].chatBoxParam]);
+      }
 
       if (this.chatDataItemService.isChatDataItemsLoaded) {
         // subscribe param once
@@ -87,7 +94,6 @@ export class MainBoxComponent implements OnInit, OnDestroy {
           // create new chat box
           activeChatBoxModel.id = chatBoxModel.id;
           this.currentChatBoxDataItem.id = chatBoxModel.id;
-          console.log('tao chat box xong');
         }).then(() => {
         // create my new member
         const myMemberModel = new MemberModel();
@@ -97,8 +103,6 @@ export class MainBoxComponent implements OnInit, OnDestroy {
         this.chatService.createNewMember(myMemberModel)
           .then((memberModel: MemberModel) => {
             this.currentChatBoxDataItem.memberId = memberModel.id;
-
-            console.log('tao member cua minh xong');
           }).then(() => {
           // create partner member in chat box
           const partnerMemberModel = new MemberModel();
@@ -109,7 +113,6 @@ export class MainBoxComponent implements OnInit, OnDestroy {
 
           this.chatService.createNewMember(partnerMemberModel)
             .then((memberModel: MemberModel) => {
-              console.log('tao member cua partner xong');
               socketMessageModel.receivedMemberId = memberModel.id;
               this.doSendMessage(socketMessageModel);
             });
@@ -145,7 +148,6 @@ export class MainBoxComponent implements OnInit, OnDestroy {
     const messageDataItem = new MessageDataItem();
     BeanUtil.copyProperties(messageDataItem, socketMessageModel);
     messageDataItem.tooltipPlacement = 'right';
-    messageDataItem.photoUrl = SharedData.loggedInUser.photoUrl;
     messageDataItem.cssClass = 'replies';
 
     const sentUserProviderId = socketMessageModel.sentUserProviderId;
@@ -165,8 +167,9 @@ export class MainBoxComponent implements OnInit, OnDestroy {
           if (_this.chatBoxParam !== sentUserProviderId) {
             _this.chatDataItemService.chatBoxModels[0].readStatus = false;
           }
-
+          messageDataItem.photoUrl = _this.currentChatBoxDataItem.photoUrl;
           _this.chatBoxDataItemMap.get(sentUserProviderId).messageDataItems.push(messageDataItem);
+          _this.checkReadStatus(_this, socketMessageModel);
           break;
         }
       }
@@ -175,10 +178,21 @@ export class MainBoxComponent implements OnInit, OnDestroy {
         .then((chatBoxModel: ChatBoxModel) => {
           _this.chatDataItemService.chatBoxModels.unshift(chatBoxModel);
           _this.chatDataItemService.chatDataItemsNotify.next(null);
-          _this.chatDataItemService.changeActiveChatItemPlusOne();
+          _this.chatDataItemService.changeActiveChatItemincreaseOne();
+          messageDataItem.photoUrl = _this.currentChatBoxDataItem.photoUrl;
           _this.chatBoxDataItemMap.get(sentUserProviderId).messageDataItems.push(messageDataItem);
-        });
+          _this.checkReadStatus(_this, socketMessageModel);
+        }).catch(() => {
+      });
     }
+  }
+
+  private checkReadStatus(_this, socketMessageModel: SocketMessageModel) {
+    const receivedChatBoxDataItem = _this.chatBoxDataItemMap.get(socketMessageModel.sentUserProviderId);
+    const memberId = receivedChatBoxDataItem.memberId;
+    const unRead = _this.chatBoxParam === socketMessageModel.sentUserProviderId;
+    _this.chatService.updateReadStatusByMemberId(memberId, unRead)
+      .then(() => receivedChatBoxDataItem.readStatus = unRead);
   }
 
   progressAfterSendMessage(messageDataItem: MessageDataItem) {

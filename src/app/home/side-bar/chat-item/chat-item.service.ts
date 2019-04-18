@@ -11,11 +11,11 @@ export class ChatItemService {
   constructor(private httpClient: HttpClient) {
   }
 
-  updateReadStatusOfMemberInChatBox(chatBoxId: number, readStatus: boolean): Promise<any> {
+  updateReadStatusByMemberId(memberId: number, readStatus: boolean): Promise<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    const data = {chatBoxId, userId: SharedData.loggedInUser.id, readStatus};
+    const data = {memberId, readStatus};
     return this.httpClient.put(ConstantData.API_MEMBER_ENDPOINT, data).toPromise();
   }
 

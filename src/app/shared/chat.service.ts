@@ -4,7 +4,7 @@ import * as SockJS from 'sockjs-client';
 import {SharedData} from './shared.data';
 import {CompatClient, Message, Stomp, StompSubscription} from '@stomp/stompjs';
 import {SocketMessageModel} from '../model/socket-message.model';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {MemberModel} from '../model/member.model';
 
 @Injectable({
@@ -64,5 +64,13 @@ export class ChatService {
 
   createNewMember(memberModel: MemberModel): Promise<any> {
     return this.httpClient.post(ConstantData.API_MEMBER_ENDPOINT, memberModel).toPromise();
+  }
+
+  updateReadStatusByMemberId(memberId: number, readStatus: boolean): Promise<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    const data = {memberId, readStatus};
+    return this.httpClient.put(ConstantData.API_MEMBER_ENDPOINT, data).toPromise();
   }
 }
