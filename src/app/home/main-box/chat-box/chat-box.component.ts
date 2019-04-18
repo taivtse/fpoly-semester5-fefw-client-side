@@ -43,7 +43,7 @@ export class ChatBoxComponent implements OnInit, AfterViewChecked, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.chatBoxDataItem && this.chatBoxDataItem.id && this.chatBoxDataItem.messageDataItems.length === 0) {
       this.chatBoxService.getMessagesByChatBoxId(this.chatBoxDataItem.id).then(messageModels => {
-        (messageModels as MessageModel[]).forEach(messageModel => {
+        for (const messageModel of (messageModels as MessageModel[])) {
           const messageDataItem: MessageDataItem = new MessageDataItem();
           BeanUtil.copyProperties(messageDataItem, messageModel);
 
@@ -58,7 +58,7 @@ export class ChatBoxComponent implements OnInit, AfterViewChecked, OnChanges {
           }
 
           this.chatBoxDataItem.messageDataItems.push(messageDataItem);
-        });
+        }
       });
     }
   }

@@ -31,15 +31,16 @@ export class MainBoxComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    // init ws
     this.chatService.connect(this, this.onMessageReceived);
     this.chatDataItemService.chatDataItemsNotify.subscribe(() => {
-      this.chatDataItemService.chatBoxModels.forEach(chatBoxModel => {
+      for (const chatBoxModel of this.chatDataItemService.chatBoxModels) {
         if (!this.chatBoxDataItemMap.has(chatBoxModel.chatBoxParam)) {
           const chatBoxDataItem = new ChatBoxDataItem();
           BeanUtil.copyProperties(chatBoxDataItem, chatBoxModel);
           this.chatBoxDataItemMap.set(chatBoxModel.chatBoxParam, chatBoxDataItem);
         }
-      });
+      }
 
       if (this.chatDataItemService.chatBoxModels.length === 1 && !this.chatDataItemService.isChatDataItemsLoaded) {
         this.chatDataItemService.isChatDataItemsLoaded = true;
@@ -48,6 +49,7 @@ export class MainBoxComponent implements OnInit, OnDestroy {
       }
 
       if (this.chatDataItemService.isChatDataItemsLoaded) {
+
         // subscribe param once
         this.chatDataItemService.isChatDataItemsLoaded = false;
         this.isShowMainBox = true;
@@ -167,7 +169,8 @@ export class MainBoxComponent implements OnInit, OnDestroy {
           if (_this.chatBoxParam !== sentUserProviderId) {
             _this.chatDataItemService.chatBoxModels[0].readStatus = false;
           }
-          messageDataItem.photoUrl = _this.currentChatBoxDataItem.photoUrl;
+
+          messageDataItem.photoUrl = _this.chatDataItemService.getChatBoxModelByProviderId(socketMessageModel.sentUserProviderId).photoUrl;
           _this.chatBoxDataItemMap.get(sentUserProviderId).messageDataItems.push(messageDataItem);
           _this.checkReadStatus(_this, socketMessageModel);
           break;
@@ -179,7 +182,7 @@ export class MainBoxComponent implements OnInit, OnDestroy {
           _this.chatDataItemService.chatBoxModels.unshift(chatBoxModel);
           _this.chatDataItemService.chatDataItemsNotify.next(null);
           _this.chatDataItemService.changeActiveChatItemincreaseOne();
-          messageDataItem.photoUrl = _this.currentChatBoxDataItem.photoUrl;
+          messageDataItem.photoUrl = _this.chatDataItemService.getChatBoxModelByProviderId(socketMessageModel.sentUserProviderId).photoUrl;
           _this.chatBoxDataItemMap.get(sentUserProviderId).messageDataItems.push(messageDataItem);
           _this.checkReadStatus(_this, socketMessageModel);
         }).catch(() => {

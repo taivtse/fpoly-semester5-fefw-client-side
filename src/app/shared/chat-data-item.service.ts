@@ -20,6 +20,16 @@ export class ChatDataItemService {
     return this.chatBoxModels[activeChatItemIndex];
   }
 
+  getChatBoxModelByProviderId(providerId: string): ChatBoxModel {
+    for (const chatBoxModel of this.chatBoxModels) {
+      if (chatBoxModel.chatBoxParam === providerId) {
+        return chatBoxModel;
+      }
+    }
+
+    return null;
+  }
+
   setActiveChatBoxModel(chatBoxModel: ChatBoxModel): void {
     let activeChatItemIndex = 0;
     this.getActiveChatItemIndex().subscribe(index => activeChatItemIndex = index).unsubscribe();
