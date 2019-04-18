@@ -41,7 +41,7 @@ export class MainBoxComponent implements OnInit, OnDestroy {
         }
       });
 
-      if (this.chatDataItemService.chatBoxModels.length === 1) {
+      if (this.chatDataItemService.chatBoxModels.length === 1 && !this.chatDataItemService.isChatDataItemsLoaded) {
         this.chatDataItemService.isChatDataItemsLoaded = true;
         this.chatDataItemService.chatBoxModels[0].readStatus = true;
         this.router.navigate(['/chat', this.chatDataItemService.chatBoxModels[0].chatBoxParam]);
