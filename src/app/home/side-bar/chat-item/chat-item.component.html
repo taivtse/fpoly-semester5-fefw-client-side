@@ -1,0 +1,23 @@
+<li class="contact {{isActive ? 'active' : ''}}"
+    [routerLink]="'/chat/' + chatBoxModel.chatBoxParam"
+    (click)="activeChatItem()">
+  <div class="wrap">
+    <span class="contact-status online"></span>
+    <img [src]="chatBoxModel.photoUrl">
+    <div class="meta {{!chatBoxModel.readStatus ? 'unread': ''}}">
+      <div class="d-flex align-items-center justify-content-between">
+        <p class="name">
+          {{chatBoxModel.name}}
+        </p>
+        <em class="date">{{chatBoxModel.lastMessageDate | date:'dd/MM/yyyy HH:mm'}}</em>
+      </div>
+      <p class="preview">
+        <span class="messages-content">
+          {{chatBoxModel.lastMessageContent}}
+        </span>
+        <b class="badge badge-secondary float-right"
+           [hidden]="chatBoxModel.readStatus">Unread</b>
+      </p>
+    </div>
+  </div>
+</li>

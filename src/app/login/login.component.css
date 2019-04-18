@@ -1,0 +1,31 @@
+.login-logo-icon {
+  border-radius: 15px;
+  width: 90px;
+  height: 90px;
+}
+
+.login-logo-name {
+  width: 280px;
+}
+
+.btn-sign-in {
+  background-color: #0B77D4;
+  color: white;
+  font-size: 17px;
+}
+
+.login-footer{
+  margin-top: 130px;
+  font-size: 12px;
+}
+.login-footer a{
+  color: #a8a8a8;
+  padding: 0 20px;
+  border-right: 1px solid #a8a8a8;
+  height: 12px;
+  line-height: 12px;
+  display: inline-block;
+}
+.login-footer a:last-child{
+  border-right: none;
+}
