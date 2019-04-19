@@ -41,7 +41,7 @@ export class ChatBoxComponent implements OnInit, AfterViewChecked, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.chatBoxDataItem && this.chatBoxDataItem.id && this.chatBoxDataItem.messageDataItems.length === 0) {
+    if (this.chatBoxDataItem && this.chatBoxDataItem.id) {
       this.chatBoxService.getMessagesByChatBoxId(this.chatBoxDataItem.id).then(messageModels => {
         for (const messageModel of (messageModels as MessageModel[])) {
           const messageDataItem: MessageDataItem = new MessageDataItem();
