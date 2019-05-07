@@ -96,6 +96,7 @@ export class MainBoxComponent implements OnInit, OnDestroy {
           // create new chat box
           activeChatBoxModel.id = chatBoxModel.id;
           this.currentChatBoxDataItem.id = chatBoxModel.id;
+          this.currentChatBoxDataItem.isMessageLoaded = true;
         }).then(() => {
         // create my new member
         const myMemberModel = new MemberModel();
@@ -170,8 +171,11 @@ export class MainBoxComponent implements OnInit, OnDestroy {
             _this.chatDataItemService.chatBoxModels[0].readStatus = false;
           }
 
-          messageDataItem.photoUrl = _this.chatBoxDataItemMap.get(socketMessageModel.sentUserProviderId).photoUrl;
-          _this.chatBoxDataItemMap.get(sentUserProviderId).messageDataItems.push(messageDataItem);
+          const chatBoxDataItem = _this.chatBoxDataItemMap.get(socketMessageModel.sentUserProviderId);
+          messageDataItem.photoUrl = chatBoxDataItem.photoUrl;
+          if (chatBoxDataItem.isMessageLoaded) {
+            _this.chatBoxDataItemMap.get(sentUserProviderId).messageDataItems.push(messageDataItem);
+          }
           _this.checkReadStatus(_this, socketMessageModel);
           break;
         }
@@ -182,8 +186,11 @@ export class MainBoxComponent implements OnInit, OnDestroy {
           _this.chatDataItemService.chatBoxModels.unshift(chatBoxModel);
           _this.chatDataItemService.chatDataItemsNotify.next(null);
           _this.chatDataItemService.changeActiveChatItemincreaseOne();
-          messageDataItem.photoUrl = _this.chatBoxDataItemMap.get(socketMessageModel.sentUserProviderId).photoUrl;
-          _this.chatBoxDataItemMap.get(sentUserProviderId).messageDataItems.push(messageDataItem);
+          const chatBoxDataItem = _this.chatBoxDataItemMap.get(socketMessageModel.sentUserProviderId);
+          messageDataItem.photoUrl = chatBoxDataItem.photoUrl;
+          if (chatBoxDataItem.isMessageLoaded) {
+            _this.chatBoxDataItemMap.get(sentUserProviderId).messageDataItems.push(messageDataItem);
+          }
           _this.checkReadStatus(_this, socketMessageModel);
         }).catch(() => {
       });
