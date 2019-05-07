@@ -2,7 +2,7 @@
 
 # Đề tài: Web chat realtime
 
-# Thời gian thực hiện: 2 tháng
+# Thời gian thực hiện: 19 ngày
 
 
 ## Các chức năng chính
