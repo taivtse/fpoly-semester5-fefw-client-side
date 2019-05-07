@@ -1,27 +1,78 @@
-# ClientSide
+# Sản phẩm của môn Frontend Framework - học kỳ 5
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.
+# Đề tài: Web chat realtime
 
-## Development server
+# Thời gian thực hiện: 2 tháng
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Các chức năng chính
+1. Đăng nhập bằng facebook
+2. Tìm kiếm người dùng
+3. Chat realtime
+4. Đánh dấu tin nhắn chưa đọc
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## Công nghệ sử dụng:
+* Backend:
+1. Spring MVC
+2. Hibernate
+3. Websocket
+3. Mô hình 3 layer
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+* Frontend:
+1. Angular 7
+2. Angular social login
+3. StormJS
+4. NG Bootstrap
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Cấu trúc các bảng trong database:
+![image](https://user-images.githubusercontent.com/41563586/57286969-ae412180-70e0-11e9-899d-562ba74130e1.png)
 
-## Running end-to-end tests
+---
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Giao diện ứng dụng:
 
-## Further help
+### Đăng nhập:
+![image](https://user-images.githubusercontent.com/41563586/57287020-c749d280-70e0-11e9-90e4-fb7d310389a9.png)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+### Cấp quyền cho ứng dụng:
+![image](https://user-images.githubusercontent.com/41563586/57287052-e34d7400-70e0-11e9-8e63-d0f38735a60e.png)
+
+
+### Màn hình sau khi đăng nhập đối với user mới:
+![image](https://user-images.githubusercontent.com/41563586/57287097-f9f3cb00-70e0-11e9-9c9d-b730171580c0.png)
+
+
+### Màn hình sau khi đăng nhập đối với user đã chat:
+
+
+### Tìm kiếm người dùng:
+![image](https://user-images.githubusercontent.com/41563586/57287257-56ef8100-70e1-11e9-8906-84e633d1da29.png)
+
+
+### Chọn người dùng và chat:
+![image](https://user-images.githubusercontent.com/41563586/57287324-82726b80-70e1-11e9-97c4-b1d21381e7c7.png)
+
+
+### Soạn tin nhắn:
+![image](https://user-images.githubusercontent.com/41563586/57287362-94eca500-70e1-11e9-83b0-402174ebc118.png)
+
+
+### Gửi tin nhắn:
+![image](https://user-images.githubusercontent.com/41563586/57287523-eb59e380-70e1-11e9-8d26-dce573ccec58.png)
+
+
+### Thông báo tin nhắn chưa đọc bên người nhận:
+![image](https://user-images.githubusercontent.com/41563586/57287628-252aea00-70e2-11e9-8196-f57461ccaa5a.png)
+
+
+### Đánh dấu tin nhắn đã đọc:
+![image](https://user-images.githubusercontent.com/41563586/57287713-4e4b7a80-70e2-11e9-868d-6f9a502e6c0a.png)
+
+
+### Thông tin ngày giờ của tin nhắn:
+![image](https://user-images.githubusercontent.com/41563586/57287887-a08c9b80-70e2-11e9-80d3-2f27239fe3ba.png)
