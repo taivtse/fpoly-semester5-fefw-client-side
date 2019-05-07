@@ -48,7 +48,7 @@
 
 
 ### Màn hình sau khi đăng nhập đối với user đã chat:
-
+![image](https://user-images.githubusercontent.com/41563586/57289412-84d6c480-70e5-11e9-98bb-791c2763aa69.png)
 
 ### Tìm kiếm người dùng:
 ![image](https://user-images.githubusercontent.com/41563586/57287257-56ef8100-70e1-11e9-8906-84e633d1da29.png)
